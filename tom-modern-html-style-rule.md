@@ -5,15 +5,26 @@ Use this file as the authoritative instruction set for LLMs and coding agents wh
 This file is not a loose moodboard.
 It is an execution rule.
 
+It can also be used as the source text for a reusable skill or system instruction.
+
 It is intended to reproduce the same working direction used in Tom's global rules for:
 - `современный дизайн`
 - HTML-first visual work
 - anti-slop layout quality
 - OpenCart-aware adaptation workflow
 
+Current trigger phrase:
+- `современный дизайн`
+
+This trigger phrase is configurable and may be changed later.
+
 ---
 
 ## 1. What This Rule Means
+
+This file may be used in two ways:
+- as a direct system instruction for another LLM or agent
+- as the body/reference for a reusable skill such as `tom-modern-design`
 
 When the user asks for `современный дизайн`, the agent must not interpret that as:
 - “make it prettier”
