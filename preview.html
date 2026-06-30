@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tom Modern Design — Component Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --tm-bg: #f4f1ea;
+        --tm-surface: #fffaf1;
+        --tm-text: #161616;
+        --tm-muted: #69645b;
+        --tm-line: rgba(22, 22, 22, 0.14);
+        --tm-accent: #ff5a00;
+        --tm-code-bg: #111517;
+        --tm-code-panel: #151a1d;
+        --tm-code-text: #d8dee9;
+        --tm-shadow: 0 28px 90px rgba(22, 22, 22, 0.14);
+        --tm-font-sans: "IBM Plex Sans", Inter, Geist, system-ui, -apple-system, sans-serif;
+        --tm-font-mono: "IBM Plex Mono", "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+        --tm-radius: 0px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+        color: var(--tm-text);
+        font-family: var(--tm-font-sans);
+        background:
+            linear-gradient(rgba(22, 22, 22, 0.035) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(22, 22, 22, 0.035) 1px, transparent 1px),
+            radial-gradient(circle at 82% 12%, rgba(255, 90, 0, 0.08), transparent 40%),
+            var(--tm-bg);
+        background-size: 32px 32px, 32px 32px, auto, auto;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .page { width: min(1180px, calc(100% - 32px)); margin: 0 auto; padding: 64px 0 80px; }
+
+    /* ---- NAV ---- */
+    .preview-nav {
+        display: flex; flex-wrap: wrap; gap: 12px;
+        margin-bottom: 56px; padding-bottom: 28px;
+        border-bottom: 2px solid var(--tm-line);
+    }
+    .preview-nav a {
+        display: inline-flex; align-items: center; min-height: 38px;
+        padding: 0 14px; border: 1px solid var(--tm-line);
+        font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+        text-transform: uppercase; text-decoration: none; color: var(--tm-text);
+        transition: background 0.15s, border-color 0.15s;
+    }
+    .preview-nav a:hover { background: var(--tm-surface); border-color: var(--tm-accent); }
+
+    /* ---- EYEBROW ---- */
+    .eyebrow {
+        margin: 0 0 18px; color: var(--tm-muted);
+        font-family: var(--tm-font-mono); font-size: 12px; font-weight: 800;
+        letter-spacing: 0.13em; text-transform: uppercase;
+    }
+
+    /* ---- SECTION ---- */
+    .section { margin-bottom: 72px; }
+    .section-title {
+        margin: 0 0 8px; font-size: clamp(28px, 4vw, 42px);
+        line-height: 1.05; letter-spacing: -0.05em; font-weight: 700;
+    }
+    .section-desc { max-width: 640px; margin: 0 0 36px; color: var(--tm-muted); font-size: 16px; line-height: 1.65; }
+
+    /* ============================================================
+       1. ACCENT WORD PATTERN
+       ============================================================ */
+    .accent-demo h1 {
+        max-width: 740px; margin: 0;
+        font-size: clamp(48px, 8vw, 88px); line-height: 0.9; letter-spacing: -0.075em;
+    }
+    .accent-demo h1 span { color: var(--tm-accent); }
+
+    /* ============================================================
+       2. PREMIUM TOKEN CARD
+       ============================================================ */
+    .key-card-frame {
+        width: 100%; max-width: 390px; padding: 18px;
+        border: 2px solid var(--tm-line); background: rgba(255,255,255,0.93);
+        box-shadow: 8px 8px 0 rgba(21,21,21,0.08);
+    }
+    .key-card-meta {
+        display: flex; justify-content: space-between; gap: 12px;
+        margin-bottom: 14px; padding-bottom: 10px;
+        border-bottom: 1px solid rgba(21,21,21,0.14);
+        font-family: var(--tm-font-mono); font-size: 10px;
+        letter-spacing: 0.14em; text-transform: uppercase; color: var(--tm-muted);
+    }
+    .key-card {
+        position: relative; isolation: isolate; overflow: hidden;
+        background: linear-gradient(155deg, #14192B 0%, #1B2A3D 55%, #11393A 100%);
+        border-radius: var(--tm-radius); padding: 24px 22px 18px; color: #EEF1F8;
+    }
+    .key-card__sheen {
+        position: absolute; top: -40%; left: -65%; width: 170%; height: 180%;
+        background: linear-gradient(115deg, transparent 32%, rgba(14,124,123,0.45) 42%, rgba(201,127,30,0.4) 50%, rgba(255,255,255,0.3) 56%, transparent 66%);
+        transform: rotate(9deg) translateX(-12%); mix-blend-mode: screen;
+        pointer-events: none; z-index: 0;
+        animation: sheen-sweep 2.4s ease-out 0.2s 1;
+    }
+    @keyframes sheen-sweep { from { transform: rotate(9deg) translateX(-38%); } to { transform: rotate(9deg) translateX(-12%); } }
+    .key-card__label {
+        position: relative; z-index: 1;
+        font-family: var(--tm-font-mono); font-size: 10.5px;
+        letter-spacing: 0.14em; text-transform: uppercase; color: #E8B872; margin-bottom: 12px;
+    }
+    .key-card__value {
+        position: relative; z-index: 1;
+        font-family: var(--tm-font-mono); font-size: clamp(19px, 2.1vw, 24px);
+        letter-spacing: 1px; font-weight: 500;
+        display: flex; flex-wrap: wrap; gap: 2px; margin-bottom: 20px;
+    }
+    .key-card__value .sep { color: rgba(238,241,248,0.35); margin: 0 1px; }
+    .key-card__value .seg--dim { color: rgba(238,241,248,0.32); }
+    .key-card__perforation {
+        position: relative;
+        border-top: 1px dashed rgba(238,241,248,0.28);
+        margin: 0 -22px; padding: 0 22px;
+    }
+    .key-card__perforation::before, .key-card__perforation::after {
+        content: ""; position: absolute; top: -8px;
+        width: 16px; height: 16px; border-radius: 50%; background: var(--tm-bg);
+    }
+    .key-card__perforation::before { left: -8px; }
+    .key-card__perforation::after { right: -8px; }
+    .key-card__footer {
+        position: relative; z-index: 1;
+        display: flex; gap: 8px; flex-wrap: wrap; padding-top: 14px;
+    }
+    .chip {
+        display: inline-flex; align-items: center; gap: 5px;
+        font-family: var(--tm-font-mono); font-size: 10.5px;
+        letter-spacing: 0.06em; text-transform: uppercase;
+        padding: 5px 10px; border-radius: 999px;
+        border: 1px solid rgba(238,241,248,0.22); color: #DCE2F0;
+    }
+    .chip svg { width: 12px; height: 12px; flex-shrink: 0; }
+
+    /* ============================================================
+       3. PREMIUM CODE WINDOW
+       ============================================================ */
+    .tm-code-window {
+        position: relative; margin: 0; overflow: hidden;
+        border: 1px solid rgba(17,21,23,0.12); background: var(--tm-code-bg);
+        box-shadow: var(--tm-shadow);
+    }
+    .tm-code-window::before {
+        content: ""; position: absolute; inset: 0; pointer-events: none;
+        background: linear-gradient(120deg, rgba(255,255,255,0.08), transparent 34%),
+                    radial-gradient(circle at 80% 0%, rgba(92,207,230,0.12), transparent 30%);
+    }
+    .tm-code-header {
+        position: relative; z-index: 1;
+        display: flex; align-items: center; gap: 14px;
+        min-height: 44px; padding: 0 18px;
+        border-bottom: 1px solid rgba(255,255,255,0.08); background: var(--tm-code-panel);
+    }
+    .tm-code-dots { display: inline-flex; gap: 8px; flex: 0 0 auto; }
+    .tm-code-dots span { width: 11px; height: 11px; border-radius: 50%; }
+    .tm-code-dots span:nth-child(1) { background: #ff5f57; }
+    .tm-code-dots span:nth-child(2) { background: #ffbd2e; }
+    .tm-code-dots span:nth-child(3) { background: #28c840; }
+    .tm-code-title {
+        overflow: hidden; color: rgba(238,242,245,0.58);
+        font-family: var(--tm-font-mono); font-size: 12px; font-weight: 800;
+        letter-spacing: 0.08em; text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap;
+    }
+    .tm-code-body { position: relative; z-index: 1; overflow-x: auto; padding: 24px; }
+    .tm-code-body pre { margin: 0; }
+    .tm-code-body code {
+        display: block; min-width: max-content;
+        color: var(--tm-code-text); font-family: var(--tm-font-mono);
+        font-size: 14px; line-height: 1.72; tab-size: 2;
+    }
+    .token-keyword { color: #ffd866; }
+    .token-function { color: #5ccfe6; }
+    .token-string { color: #a6e3a1; }
+    .token-number { color: #c792ea; }
+    .token-property { color: #82aaff; }
+    .token-comment { color: #6f7b86; }
+    .token-punctuation { color: #aab2bf; }
+
+    /* ============================================================
+       4. PANELS & READOUT
+       ============================================================ */
+    .readout-strip { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; margin-bottom: 22px; }
+    .readout-tile {
+        position: relative; padding: 18px 18px 20px;
+        border: 2px solid var(--tm-line); background: rgba(255,255,255,0.95);
+        box-shadow: 6px 6px 0 rgba(21,21,21,0.06);
+    }
+    .readout-tile::before {
+        content: ""; position: absolute; left: 16px; top: 0;
+        width: 52px; border-top: 3px solid var(--tm-accent);
+    }
+    .readout-tile__label {
+        margin-bottom: 9px; color: var(--tm-muted);
+        font-family: var(--tm-font-mono); font-size: 10px;
+        letter-spacing: 0.16em; text-transform: uppercase;
+    }
+    .readout-tile__value { font-size: 14.5px; font-weight: 600; line-height: 1.5; }
+
+    .panel {
+        position: relative; isolation: isolate;
+        padding: 30px 32px 32px; margin-bottom: 18px;
+        border: 2px solid var(--tm-line); background: rgba(255,255,255,0.96);
+        box-shadow: 10px 10px 0 rgba(21,21,21,0.09);
+    }
+    .panel::before {
+        content: ""; position: absolute; left: 0; top: 0;
+        width: 72px; border-top: 4px solid var(--tm-accent);
+    }
+    .panel-head {
+        display: flex; align-items: center; gap: 12px;
+        margin-bottom: 18px; padding-bottom: 14px;
+        border-bottom: 1px solid rgba(21,21,21,0.12);
+    }
+    .panel-tick { width: 11px; height: 11px; background: var(--tm-accent); flex-shrink: 0; }
+    .panel h2 {
+        margin: 0; font-size: clamp(21px, 2vw, 25px);
+        line-height: 1.15; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase;
+    }
+    .list-clean { list-style: none; display: grid; gap: 12px; }
+    .list-clean li { position: relative; padding: 0 0 0 22px; color: var(--tm-muted); }
+    .list-clean li::before { content: ""; position: absolute; left: 0; top: 9px; width: 9px; height: 9px; background: var(--tm-accent); }
+    .list-clean li strong { color: var(--tm-text); }
+
+    /* ============================================================
+       5. FEATURE GRID
+       ============================================================ */
+    .feature-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+    .feature-card {
+        display: flex; flex-direction: column; min-height: 100%;
+        padding: 18px; border: 2px solid var(--tm-line);
+        background: linear-gradient(180deg, rgba(255,255,255,0.24) 0%, rgba(255,255,255,0) 100%), var(--tm-surface);
+        transition: transform 0.18s ease;
+    }
+    .feature-card:hover { transform: translate(-3px, -3px); }
+    .feature-card__icon {
+        width: 40px; height: 40px; margin-bottom: 14px;
+        border: 2px solid var(--tm-line); background: var(--tm-accent);
+        color: #fff9f4; display: flex; align-items: center; justify-content: center;
+    }
+    .feature-card__icon svg { width: 18px; height: 18px; }
+    .feature-card h3 { margin: 0 0 8px; font-size: 15px; line-height: 1.38; font-weight: 700; text-transform: uppercase; }
+    .feature-card p { margin: 0; color: var(--tm-muted); font-size: 14px; }
+
+    /* ============================================================
+       6. SPEC LIST
+       ============================================================ */
+    .spec-list { border-top: 2px solid var(--tm-line); }
+    .spec-row {
+        display: grid; grid-template-columns: 200px 1fr; gap: 18px;
+        padding: 14px 0; border-bottom: 1px solid rgba(21,21,21,0.14);
+    }
+    .spec-label {
+        color: var(--tm-muted); font-family: var(--tm-font-mono);
+        font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase;
+    }
+    .spec-value { color: var(--tm-muted); font-size: 15px; }
+    .spec-value code {
+        display: inline-block; padding: 2px 7px;
+        border: 1px solid rgba(21,21,21,0.15); background: var(--tm-surface);
+        font-family: var(--tm-font-mono); font-size: 12.5px;
+    }
+
+    /* ============================================================
+       7. BUTTONS
+       ============================================================ */
+    .button {
+        display: inline-flex; align-items: center; justify-content: center;
+        min-height: 46px; padding: 0 18px; border: 1px solid var(--tm-line);
+        font-size: 13px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase;
+        transition: transform 0.15s, background 0.15s, border-color 0.15s; cursor: pointer;
+    }
+    .button:hover { transform: translateY(-2px); }
+    .button--primary { border-color: var(--tm-accent); background: var(--tm-accent); color: #fff; }
+    .button--ghost { background: rgba(255,250,241,0.68); color: var(--tm-text); }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 920px) {
+        .page { padding: 36px 0 48px; }
+        .feature-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+        .readout-strip { grid-template-columns: 1fr; }
+        .spec-row { grid-template-columns: 1fr; gap: 6px; }
+    }
+    @media (max-width: 560px) {
+        .page { width: min(100% - 24px, 1180px); }
+        .feature-grid { grid-template-columns: 1fr; }
+        .tm-code-body { padding: 18px 14px; }
+        .tm-code-body code { font-size: 13px; }
+    }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+    <!-- NAVIGATION -->
+    <nav class="preview-nav">
+        <a href="#accent-word">Accent Word</a>
+        <a href="#token-card">Token Card</a>
+        <a href="#code-window">Code Window</a>
+        <a href="#readout">Readout Strip</a>
+        <a href="#panels">Panels</a>
+        <a href="#features">Feature Grid</a>
+        <a href="#spec-list">Spec List</a>
+        <a href="#buttons">Buttons</a>
+    </nav>
+
+    <!-- 1. ACCENT WORD PATTERN -->
+    <section class="section accent-demo" id="accent-word">
+        <p class="eyebrow">4.7 · Accent Word Pattern</p>
+        <h1>Token Extraction <span>Engine</span></h1>
+        <p class="section-desc">One keyword in a headline highlighted with the primary accent color. Use sparingly — one accent word per section maximum.</p>
+    </section>
+
+    <!-- 2. PREMIUM TOKEN CARD -->
+    <section class="section" id="token-card">
+        <p class="eyebrow">4.8 · Premium Token Card</p>
+        <h2 class="section-title" style="margin-bottom: 8px; font-size: clamp(21px,2vw,25px); line-height: 1.15; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase;">Activation Key Display</h2>
+        <p class="section-desc">Dark-gradient card with holographic sheen, mono typography, perforation line, and pill-shaped chips. For keys, codes, licenses, and identifiers.</p>
+
+        <div class="key-card-frame">
+            <div class="key-card-meta">
+                <span>Preview Artifact</span>
+                <span>Activation Sample</span>
+            </div>
+            <div class="key-card">
+                <div class="key-card__sheen"></div>
+                <div class="key-card__label">Activation Key</div>
+                <div class="key-card__value">
+                    <span>8F2C</span><span class="sep">–</span><span class="seg--dim">ZQ91</span><span class="sep">–</span><span>K4D7</span><span class="sep">–</span><span class="seg--dim">TX5E</span>
+                </div>
+                <div class="key-card__perforation">
+                    <div class="key-card__footer">
+                        <span class="chip">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+                            Unique Code
+                        </span>
+                        <span class="chip">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
+                            1 Code = 1 Order
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. PREMIUM CODE WINDOW -->
+    <section class="section" id="code-window">
+        <p class="eyebrow">4.9 · Premium Code Window</p>
+        <h2 class="section-title" style="margin-bottom: 8px; font-size: clamp(21px,2vw,25px); line-height: 1.15; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase;">Code Display Block</h2>
+        <p class="section-desc">Dark-themed code editor window with macOS chrome, atmospheric gradient overlay, and seven syntax highlighting tokens.</p>
+
+        <div class="tm-code-window">
+            <div class="tm-code-header">
+                <span class="tm-code-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+                <span class="tm-code-title">design-analyzer.js</span>
+            </div>
+            <div class="tm-code-body">
+<pre><code><span class="token-keyword">const</span> <span class="token-function">pluckDeep</span> = <span class="token-property">key</span> <span class="token-punctuation">=></span> <span class="token-property">obj</span> <span class="token-punctuation">=></span>
+  key<span class="token-punctuation">.</span><span class="token-function">split</span>(<span class="token-string">'.'</span>)<span class="token-punctuation">.</span><span class="token-function">reduce</span>(
+    (<span class="token-property">accum</span><span class="token-punctuation">,</span> <span class="token-property">key</span>) <span class="token-punctuation">=></span> accum<span class="token-punctuation">[</span>key<span class="token-punctuation">]</span><span class="token-punctuation">,</span>
+    obj
+  )<span class="token-punctuation">;</span>
+
+<span class="token-comment">// Extract tokens from page styles</span>
+<span class="token-keyword">const</span> <span class="token-function">analyze</span> <span class="token-punctuation">=</span> <span class="token-keyword">async</span> (<span class="token-property">url</span>) <span class="token-punctuation">=></span> <span class="token-punctuation">{</span>
+  <span class="token-keyword">const</span> tokens <span class="token-punctuation">=</span> <span class="token-keyword">await</span> <span class="token-function">extractDesignTokens</span>(url)<span class="token-punctuation">;</span>
+  <span class="token-keyword">return</span> <span class="token-function">createDesignMarkdown</span>(tokens)<span class="token-punctuation">;</span>
+<span class="token-punctuation">}</span><span class="token-punctuation">;</span></code></pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. READOUT STRIP -->
+    <section class="section" id="readout">
+        <p class="eyebrow">Readout Strip</p>
+        <h2 class="section-title" style="margin-bottom: 8px; font-size: clamp(21px,2vw,25px); line-height: 1.15; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase;">Key Metrics</h2>
+        <p class="section-desc">Three-column metric strip with accent top-border markers. For quick stats and key data points.</p>
+
+        <div class="readout-strip">
+            <div class="readout-tile">
+                <div class="readout-tile__label">Key Binding</div>
+                <div class="readout-tile__value">On first transition to "Completed"</div>
+            </div>
+            <div class="readout-tile">
+                <div class="readout-tile__label">Customer Email</div>
+                <div class="readout-tile__value">Notification + link to "My Codes"</div>
+            </div>
+            <div class="readout-tile">
+                <div class="readout-tile__label">Backup Send</div>
+                <div class="readout-tile__value">Via standard OpenCart emails</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. PANELS -->
+    <section class="section" id="panels">
+        <p class="eyebrow">Panels</p>
+        <h2 class="section-title" style="margin-bottom: 8px; font-size: clamp(21px,2vw,25px); line-height: 1.15; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase;">Module Purpose</h2>
+        <p class="section-desc">Framed content panels with accent top-border and tick markers. For feature lists and structured information.</p>
+
+        <div class="panel">
+            <div class="panel-head">
+                <span class="panel-tick"></span>
+                <h2>Key Features</h2>
+            </div>
+            <ul class="list-clean">
+                <li><strong>Automation:</strong> key binding on order status transition to "Completed".</li>
+                <li><strong>Uniqueness control:</strong> same code never issued twice until admin returns it to pool.</li>
+                <li><strong>Stock sync:</strong> product quantity auto-recalculates from free key count.</li>
+                <li><strong>Admin convenience:</strong> manual entry, CSV import, status view, and key management in order.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 6. FEATURE GRID -->
+    <section class="section" id="features">
+        <p class="eyebrow">Feature Grid</p>
+        <h2 class="section-title" style="margin-bottom: 8px; font-size: clamp(21px,2vw,25px); line-height: 1.15; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase;">Capabilities</h2>
+        <p class="section-desc">Three-column card grid with icon headers and hover lift effect. For feature showcases and product capabilities.</p>
+
+        <div class="feature-grid">
+            <article class="feature-card">
+                <div class="feature-card__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="15" r="4"/><path d="M11 12l8-8M16 5l2 2M19 2l2 2"/></svg>
+                </div>
+                <h3>Import & Manage Keys</h3>
+                <p>Textarea and CSV import in product card, plus quick CSV template for admin.</p>
+            </article>
+            <article class="feature-card">
+                <div class="feature-card__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6"/></svg>
+                </div>
+                <h3>Customer Account</h3>
+                <p>Dedicated "My Activation Codes" page with purchase history and related products.</p>
+            </article>
+            <article class="feature-card">
+                <div class="feature-card__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 2.5h6v3H9zM8 11h8M8 15h8M8 19h5"/></svg>
+                </div>
+                <h3>Admin Order Panel</h3>
+                <p>Shows issued codes with resend notification and return keys to pool buttons.</p>
+            </article>
+            <article class="feature-card">
+                <div class="feature-card__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 10-12 0c0 4-1.5 5.5-1.5 7h15c0-1.5-1.5-3-1.5-7z"/><path d="M9.5 18a2.5 2.5 0 005 0"/></svg>
+                </div>
+                <h3>Low Stock Alerts</h3>
+                <p>Configurable admin notification on free key threshold (enable/disable in settings).</p>
+            </article>
+            <article class="feature-card">
+                <div class="feature-card__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18M8 13h3M8 16h6"/></svg>
+                </div>
+                <h3>Optional Help Page</h3>
+                <p>Link any OpenCart information page to a product — customer sees it next to their key.</p>
+            </article>
+            <article class="feature-card">
+                <div class="feature-card__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+                </div>
+                <h3>Safe Re-issuance</h3>
+                <p>Codes don't duplicate on repeated "Completed" transitions — tracks already-bound count per order.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- 7. SPEC LIST -->
+    <section class="section" id="spec-list">
+        <p class="eyebrow">Spec List</p>
+        <h2 class="section-title" style="margin-bottom: 8px; font-size: clamp(21px,2vw,25px); line-height: 1.15; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase;">Technical Details</h2>
+        <p class="section-desc">Two-column specification rows with mono labels. For technical specifications and configuration details.</p>
+
+        <div class="panel">
+            <div class="spec-list">
+                <div class="spec-row">
+                    <div class="spec-label">Architecture</div>
+                    <div class="spec-value">MVC-L for OpenCart 3.x, separate admin and catalog controllers.</div>
+                </div>
+                <div class="spec-row">
+                    <div class="spec-label">Events</div>
+                    <div class="spec-value">Product save and order status change via event system.</div>
+                </div>
+                <div class="spec-row">
+                    <div class="spec-label">OCMOD</div>
+                    <div class="spec-value">Targeted insertions in order emails and account templates.</div>
+                </div>
+                <div class="spec-row">
+                    <div class="spec-label">Database</div>
+                    <div class="spec-value">Custom <code>oc_dc_code</code> table with indexes and product/code uniqueness.</div>
+                </div>
+                <div class="spec-row">
+                    <div class="spec-label">Stock</div>
+                    <div class="spec-value">Product quantity synced with free code count.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. BUTTONS -->
+    <section class="section" id="buttons">
+        <p class="eyebrow">Buttons</p>
+        <h2 class="section-title" style="margin-bottom: 8px; font-size: clamp(21px,2vw,25px); line-height: 1.15; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase;">Actions</h2>
+        <p class="section-desc">Primary and ghost button variants. For CTAs and secondary actions.</p>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+            <button class="button button--primary">Primary Action</button>
+            <button class="button button--ghost">Secondary Action</button>
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>
