@@ -9,11 +9,11 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
     :root {
-        --tm-bg: #f4f1ea;
-        --tm-surface: #fffaf1;
+        --tm-bg: #f5f5f3;
+        --tm-surface: #ffffff;
         --tm-text: #161616;
-        --tm-muted: #69645b;
-        --tm-line: rgba(22, 22, 22, 0.14);
+        --tm-muted: #6b6b6b;
+        --tm-line: rgba(22, 22, 22, 0.12);
         --tm-accent: #ff5a00;
         --tm-code-bg: #111517;
         --tm-code-panel: #151a1d;
@@ -31,9 +31,9 @@
         color: var(--tm-text);
         font-family: var(--tm-font-sans);
         background:
-            linear-gradient(rgba(22, 22, 22, 0.035) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(22, 22, 22, 0.035) 1px, transparent 1px),
-            radial-gradient(circle at 82% 12%, rgba(255, 90, 0, 0.08), transparent 40%),
+            linear-gradient(rgba(22, 22, 22, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(22, 22, 22, 0.03) 1px, transparent 1px),
+            radial-gradient(circle at 82% 12%, rgba(255, 90, 0, 0.05), transparent 40%),
             var(--tm-bg);
         background-size: 32px 32px, 32px 32px, auto, auto;
         -webkit-font-smoothing: antialiased;
@@ -248,7 +248,7 @@
     .feature-card__icon {
         width: 40px; height: 40px; margin-bottom: 14px;
         border: 2px solid var(--tm-line); background: var(--tm-accent);
-        color: #fff9f4; display: flex; align-items: center; justify-content: center;
+        color: #ffffff; display: flex; align-items: center; justify-content: center;
     }
     .feature-card__icon svg { width: 18px; height: 18px; }
     .feature-card h3 { margin: 0 0 8px; font-size: 15px; line-height: 1.38; font-weight: 700; text-transform: uppercase; }
@@ -284,7 +284,7 @@
     }
     .button:hover { transform: translateY(-2px); }
     .button--primary { border-color: var(--tm-accent); background: var(--tm-accent); color: #fff; }
-    .button--ghost { background: rgba(255,250,241,0.68); color: var(--tm-text); }
+    .button--ghost { background: rgba(255,255,255,0.72); color: var(--tm-text); }
 
     /* ============================================================
        RESPONSIVE
