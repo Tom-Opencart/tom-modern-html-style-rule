@@ -6,7 +6,8 @@
 <title>Tom Modern Design — Component Preview</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-mono/style.css">
 <style>
     :root {
         --tm-bg: #fafafa;
@@ -25,9 +26,10 @@
         --tm-shadow-hard: 8px 8px 0 rgba(150, 150, 150, 0.12);
         --tm-shadow-soft: 4px 4px 0 rgba(150, 150, 150, 0.1);
         --tm-shadow-code: 0 28px 90px rgba(22, 22, 22, 0.14);
-        --tm-font-sans: 'Geist Sans', 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
-        --tm-font-mono: 'Geist Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+        --tm-font-sans: 'Geist Sans', system-ui, -apple-system, sans-serif;
+        --tm-font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
         --tm-radius: 0px;
+        --tm-container: 1240px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -44,59 +46,361 @@
         -webkit-font-smoothing: antialiased;
     }
 
-    .page { width: min(1180px, calc(100% - 32px)); margin: 0 auto; padding: 64px 0 80px; }
+    a { color: inherit; text-decoration: none; }
 
-    /* ---- NAV ---- */
+    .container { width: min(100% - 40px, var(--tm-container)); margin: 0 auto; }
+
+    /* ---- NAVIGATION ---- */
     .preview-nav {
-        display: flex; flex-wrap: wrap; gap: 12px;
-        margin-bottom: 56px; padding-bottom: 28px;
-        border-bottom: 2px solid var(--tm-line);
+        position: sticky; top: 0; z-index: 20;
+        backdrop-filter: blur(12px);
+        background: rgba(250, 250, 250, 0.88);
+        border-bottom: 1px solid var(--tm-line-muted);
+        padding: 0 20px;
+    }
+    .preview-nav-inner {
+        max-width: var(--tm-container); margin: 0 auto;
+        display: flex; flex-wrap: wrap; gap: 8px;
+        padding: 14px 0;
     }
     .preview-nav a {
-        display: inline-flex; align-items: center; min-height: 38px;
-        padding: 0 14px; border: 1px solid var(--tm-line);
-        font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
-        text-transform: uppercase; text-decoration: none; color: var(--tm-text);
+        display: inline-flex; align-items: center; min-height: 36px;
+        padding: 0 12px; border: 1px solid var(--tm-line-muted);
+        font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+        text-transform: uppercase;
         transition: background 0.15s, border-color 0.15s;
     }
     .preview-nav a:hover { background: var(--tm-surface); border-color: var(--tm-accent); }
 
     /* ---- EYEBROW ---- */
     .eyebrow {
-        margin: 0 0 18px; color: var(--tm-muted);
-        font-family: var(--tm-font-mono); font-size: 12px; font-weight: 800;
-        letter-spacing: 0.13em; text-transform: uppercase;
+        display: inline-block;
+        font-family: var(--tm-font-mono); font-size: 12px; font-weight: 700;
+        letter-spacing: 0.14em; text-transform: uppercase; color: var(--tm-muted);
+        margin-bottom: 16px;
     }
 
     /* ---- SECTION ---- */
-    .section { margin-bottom: 72px; }
-    .section-title {
-        margin: 0 0 8px; font-size: clamp(28px, 4vw, 42px);
-        line-height: 1.05; letter-spacing: -0.05em; font-weight: 700;
+    .section { padding: 96px 0; }
+    .section-alt {
+        background: rgba(255, 255, 255, 0.72);
+        border-top: 1px solid var(--tm-line-muted);
+        border-bottom: 1px solid var(--tm-line-muted);
     }
-    .section-desc { max-width: 640px; margin: 0 0 36px; color: var(--tm-muted); font-size: 16px; line-height: 1.65; }
+    .section-head { max-width: 760px; margin: 0 auto 48px; text-align: center; }
+    .section-head.align-left { margin-left: 0; text-align: left; }
+    .section-head h2, .hero h1 {
+        margin: 0; font-weight: 700; letter-spacing: -0.04em; text-transform: uppercase;
+        font-size: clamp(2.3rem, 5vw, 4.8rem); line-height: 0.96;
+    }
+    .section-head p { color: var(--tm-text-secondary); line-height: 1.65; margin-top: 16px; }
+    .title-highlight { color: var(--tm-accent); }
+
+    /* ---- FRAME ---- */
+    .frame {
+        background: var(--tm-surface);
+        border: 1px solid var(--tm-line);
+        box-shadow: var(--tm-shadow-soft);
+    }
+
+    /* ---- BUTTONS ---- */
+    .button {
+        display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+        padding: 16px 22px; border: 1px solid var(--tm-line);
+        text-decoration: none; text-transform: uppercase;
+        letter-spacing: 0.08em; font-size: 13px; font-weight: 700;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        cursor: pointer;
+    }
+    .button:hover { transform: translate(-2px, -2px); box-shadow: var(--tm-shadow-hard); }
+    .button-primary { background: var(--tm-text); color: #ffffff; box-shadow: var(--tm-shadow-soft); }
+    .button-secondary { background: transparent; color: var(--tm-text); }
+    .button-secondary:hover { background: var(--tm-surface); }
+    .button-block { width: 100%; }
 
     /* ============================================================
-       1. ACCENT WORD PATTERN
+       HERO
        ============================================================ */
-    .accent-demo h1 {
-        max-width: 740px; margin: 0;
-        font-size: clamp(48px, 8vw, 88px); line-height: 0.9; letter-spacing: -0.075em;
+    .hero-grid {
+        display: grid; grid-template-columns: minmax(0, 0.92fr) minmax(420px, 1.08fr);
+        gap: 42px; align-items: center; min-height: calc(100vh - 128px);
     }
-    .accent-demo h1 span { color: var(--tm-accent); }
+    .hero h1 { max-width: 740px; }
+    .hero-lead { color: var(--tm-text-secondary); font-size: 18px; line-height: 1.65; margin-top: 20px; max-width: 560px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    .hero-notes {
+        list-style: none; display: flex; flex-wrap: wrap; gap: 10px 24px;
+        margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--tm-line-muted);
+    }
+    .hero-notes li {
+        color: var(--tm-muted); font-size: 13px;
+        font-family: var(--tm-font-mono); letter-spacing: 0.06em;
+    }
+
+    /* ---- HERO PANEL (demo dashboard) ---- */
+    .hero-panel { min-width: 0; }
+    .hero-visual { padding: 0; overflow: hidden; }
+    .visual-topline {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 12px 18px; border-bottom: 1px solid var(--tm-line-muted);
+        font-family: var(--tm-font-mono); font-size: 11px; letter-spacing: 0.1em;
+        text-transform: uppercase; color: var(--tm-muted);
+    }
+    .visual-metrics {
+        display: grid; grid-template-columns: repeat(3, 1fr);
+        border-bottom: 1px solid var(--tm-line-muted);
+    }
+    .visual-metrics article {
+        padding: 18px; text-align: center;
+        border-right: 1px solid var(--tm-line-muted);
+    }
+    .visual-metrics article:last-child { border-right: none; }
+    .visual-metrics strong { display: block; font-size: 22px; letter-spacing: -0.03em; }
+    .visual-metrics span { font-size: 12px; color: var(--tm-muted); font-family: var(--tm-font-mono); letter-spacing: 0.06em; }
+    .visual-canvas { padding: 18px; background: var(--tm-surface-alt); }
+    .signal-stack { display: flex; flex-direction: column; gap: 10px; }
+    .signal-card {
+        padding: 14px 16px; background: var(--tm-surface);
+        border: 1px solid var(--tm-line-muted);
+    }
+    .signal-label {
+        display: inline-block; margin-bottom: 8px;
+        font-family: var(--tm-font-mono); font-size: 10px; font-weight: 700;
+        letter-spacing: 0.14em; text-transform: uppercase; color: var(--tm-accent);
+    }
+    .signal-card h3 { margin: 0 0 6px; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: -0.02em; }
+    .signal-card p { margin: 0; font-size: 13px; color: var(--tm-muted); }
+    .visual-log {
+        border-top: 1px solid var(--tm-line-muted); padding: 14px 18px;
+        display: flex; flex-direction: column; gap: 10px;
+    }
+    .visual-log > div { display: flex; gap: 12px; align-items: flex-start; }
+    .log-label {
+        flex-shrink: 0;
+        font-family: var(--tm-font-mono); font-size: 10px; font-weight: 700;
+        letter-spacing: 0.1em; text-transform: uppercase; color: var(--tm-accent);
+        min-width: 80px;
+    }
+    .visual-log p { margin: 0; font-size: 13px; color: var(--tm-text-secondary); }
 
     /* ============================================================
-       2. PREMIUM TOKEN CARD
+       TRUST BAND
+       ============================================================ */
+    .trust-band {
+        padding: 48px 0;
+        border-top: 1px solid var(--tm-line-muted);
+        border-bottom: 1px solid var(--tm-line-muted);
+        background: var(--tm-surface);
+    }
+    .trust-grid { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 32px; }
+    .trust-metrics { display: flex; gap: 32px; flex-wrap: wrap; }
+    .trust-metrics article { text-align: center; }
+    .trust-metrics strong { display: block; font-size: 24px; letter-spacing: -0.03em; }
+    .trust-metrics span { font-size: 12px; color: var(--tm-muted); font-family: var(--tm-font-mono); letter-spacing: 0.06em; }
+    .trust-platforms { display: flex; align-items: center; gap: 16px; }
+    .trust-platforms span { font-family: var(--tm-font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--tm-muted); }
+    .trust-platforms ul { list-style: none; display: flex; gap: 12px; }
+    .trust-platforms li {
+        padding: 6px 12px; border: 1px solid var(--tm-line-muted);
+        font-size: 12px; font-weight: 600; color: var(--tm-text-secondary);
+    }
+
+    /* ============================================================
+       DEFINITION GRID
+       ============================================================ */
+    .definition-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .definition-list { padding: 28px; }
+    .definition-list article { margin-bottom: 24px; }
+    .definition-list article:last-child { margin-bottom: 0; }
+    .definition-list h3 { margin: 0 0 8px; font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: -0.02em; }
+    .definition-list p { color: var(--tm-text-secondary); font-size: 14px; line-height: 1.6; }
+    .definition-aside { padding: 28px; }
+    .definition-aside h3 { margin: 0 0 12px; font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: -0.03em; }
+    .definition-aside p { color: var(--tm-text-secondary); font-size: 14px; line-height: 1.6; }
+    .plain-list { list-style: none; margin-top: 16px; }
+    .plain-list li {
+        position: relative; padding-left: 18px; margin-bottom: 8px;
+        font-size: 14px; color: var(--tm-text-secondary);
+    }
+    .plain-list li::before { content: ""; position: absolute; left: 0; top: 8px; width: 8px; height: 8px; background: var(--tm-accent); }
+
+    /* ============================================================
+       FEATURE GRID
+       ============================================================ */
+    .feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .feature-card { padding: 28px; }
+    .feature-card-wide { grid-column: span 2; }
+    .feature-meta {
+        display: inline-block; margin-bottom: 14px;
+        font-family: var(--tm-font-mono); font-size: 11px; font-weight: 700;
+        letter-spacing: 0.14em; text-transform: uppercase; color: var(--tm-muted);
+    }
+    .feature-card h3 { margin: 0 0 10px; font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: -0.03em; }
+    .feature-card p { color: var(--tm-text-secondary); font-size: 14px; line-height: 1.6; }
+
+    /* ============================================================
+       WORKFLOW / TIMELINE
+       ============================================================ */
+    .workflow-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 42px; align-items: start; }
+    .timeline { list-style: none; counter-reset: step; }
+    .timeline li {
+        display: flex; gap: 20px; padding: 24px 0;
+        border-bottom: 1px solid var(--tm-line-muted);
+    }
+    .timeline li:last-child { border-bottom: none; }
+    .timeline span {
+        flex-shrink: 0; width: 48px; height: 48px;
+        display: flex; align-items: center; justify-content: center;
+        border: 2px solid var(--tm-line);
+        font-family: var(--tm-font-mono); font-size: 16px; font-weight: 700;
+    }
+    .timeline h3 { margin: 0 0 6px; font-size: 16px; font-weight: 700; text-transform: uppercase; }
+    .timeline p { margin: 0; font-size: 14px; color: var(--tm-text-secondary); }
+    .workflow-visual { padding: 28px; }
+    .diagram { display: flex; gap: 24px; align-items: center; justify-content: center; }
+    .diagram-column {
+        flex: 1; padding: 18px;
+        border: 1px solid var(--tm-line-muted); background: var(--tm-surface-alt);
+    }
+    .diagram-column h3 { margin: 0 0 12px; font-size: 12px; font-weight: 700; text-transform: uppercase; font-family: var(--tm-font-mono); letter-spacing: 0.1em; color: var(--tm-muted); }
+    .diagram-column ul { list-style: none; }
+    .diagram-column li { padding: 6px 0; font-size: 13px; color: var(--tm-text-secondary); border-bottom: 1px solid var(--tm-line-muted); }
+    .diagram-column li:last-child { border-bottom: none; }
+    .diagram-node {
+        width: 56px; height: 56px; flex-shrink: 0;
+        display: flex; align-items: center; justify-content: center;
+        border: 2px solid var(--tm-accent); background: var(--tm-accent-soft);
+        font-family: var(--tm-font-mono); font-size: 18px; font-weight: 700;
+    }
+    .diagram-note { margin-top: 18px; font-size: 12px; color: var(--tm-muted); text-align: center; }
+
+    /* ============================================================
+       UPDATES GRID
+       ============================================================ */
+    .updates-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .updates-grid article { padding: 24px; }
+    .updates-grid h3 { margin: 0 0 10px; font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: -0.02em; }
+    .updates-grid p { color: var(--tm-text-secondary); font-size: 14px; line-height: 1.6; }
+
+    /* ============================================================
+       PAIN GRID
+       ============================================================ */
+    .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .pain-card { padding: 24px; }
+    .pain-card h3 { margin: 0 0 10px; font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: -0.02em; }
+    .pain-card p { color: var(--tm-text-secondary); font-size: 14px; line-height: 1.6; }
+
+    /* ============================================================
+       TABS
+       ============================================================ */
+    .tab-shell { padding: 0; overflow: hidden; }
+    .tab-nav {
+        display: flex; border-bottom: 1px solid var(--tm-line-muted);
+        overflow-x: auto;
+    }
+    .tab-button {
+        padding: 14px 20px; border: none; background: none;
+        font-family: var(--tm-font-mono); font-size: 12px; font-weight: 700;
+        letter-spacing: 0.1em; text-transform: uppercase; color: var(--tm-muted);
+        cursor: pointer; white-space: nowrap;
+        border-bottom: 2px solid transparent;
+        transition: color 0.15s, border-color 0.15s;
+    }
+    .tab-button:hover { color: var(--tm-text); }
+    .tab-button.is-active { color: var(--tm-text); border-bottom-color: var(--tm-accent); }
+    .tab-panel { display: none; padding: 28px; }
+    .tab-panel.is-active { display: block; }
+    .mini-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .mini-grid article { padding: 18px; border: 1px solid var(--tm-line-muted); background: var(--tm-surface-alt); }
+    .mini-grid h3 { margin: 0 0 8px; font-size: 14px; font-weight: 700; text-transform: uppercase; }
+    .mini-grid p { margin: 0; font-size: 13px; color: var(--tm-text-secondary); }
+
+    /* ============================================================
+       QUOTES & COMPARISON
+       ============================================================ */
+    .proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 42px; }
+    .quote-stack article { padding: 24px; margin-bottom: 18px; }
+    .quote-stack article:last-child { margin-bottom: 0; }
+    .quote-stack p { font-size: 15px; line-height: 1.6; font-style: italic; margin: 0 0 12px; }
+    .quote-stack span { font-family: var(--tm-font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--tm-muted); }
+    .comparison { padding: 28px; }
+    .comparison h3 { margin: 0 0 20px; font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: -0.03em; }
+    .comparison-table { display: flex; flex-direction: column; }
+    .comparison-table div {
+        display: grid; grid-template-columns: 1fr 1fr;
+        padding: 12px 0; border-bottom: 1px solid var(--tm-line-muted);
+    }
+    .comparison-table span { font-size: 13px; color: var(--tm-muted); }
+    .comparison-table strong { font-size: 13px; font-weight: 600; }
+
+    /* ============================================================
+       PRICING
+       ============================================================ */
+    .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 42px; align-items: start; }
+    .pricing-card { padding: 32px; }
+    .pricing-head { margin-bottom: 24px; padding-bottom: 20px; border-bottom: 2px solid var(--tm-line); }
+    .pricing-head span { font-family: var(--tm-font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--tm-muted); }
+    .pricing-head strong { display: block; font-size: 48px; letter-spacing: -0.04em; margin: 8px 0 4px; }
+    .pricing-head small { font-size: 14px; color: var(--tm-muted); }
+
+    /* ============================================================
+       FAQ
+       ============================================================ */
+    .faq-wrap { max-width: 800px; margin: 0 auto; }
+    .faq-list { display: flex; flex-direction: column; gap: 12px; }
+    .faq-item { padding: 0; overflow: hidden; }
+    .faq-question {
+        display: flex; justify-content: space-between; align-items: center;
+        width: 100%; padding: 18px 24px; border: none; background: none;
+        font-size: 15px; font-weight: 600; text-align: left; cursor: pointer;
+        transition: background 0.15s;
+    }
+    .faq-question:hover { background: var(--tm-surface-alt); }
+    .faq-icon {
+        width: 20px; height: 20px; flex-shrink: 0; position: relative;
+    }
+    .faq-icon::before, .faq-icon::after {
+        content: ""; position: absolute; background: var(--tm-text);
+    }
+    .faq-icon::before { left: 9px; top: 4px; width: 2px; height: 12px; }
+    .faq-icon::after { left: 4px; top: 9px; width: 12px; height: 2px; }
+    .faq-item.is-open .faq-icon::before { display: none; }
+    .faq-answer { display: none; padding: 0 24px 18px; }
+    .faq-answer p { color: var(--tm-text-secondary); font-size: 14px; line-height: 1.6; }
+    .faq-item.is-open .faq-answer { display: block; }
+
+    /* ============================================================
+       CONTACT FORM
+       ============================================================ */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 42px; align-items: start; }
+    .contact-card { padding: 32px; }
+    .field-group { margin-bottom: 18px; }
+    .field-group label {
+        display: block; margin-bottom: 6px;
+        font-family: var(--tm-font-mono); font-size: 12px; font-weight: 700;
+        letter-spacing: 0.1em; text-transform: uppercase; color: var(--tm-muted);
+    }
+    .form-control {
+        width: 100%; padding: 14px 16px;
+        border: 1px solid var(--tm-line); background: var(--tm-surface);
+        font-family: var(--tm-font-sans); font-size: 14px; color: var(--tm-text);
+        transition: border-color 0.15s;
+    }
+    .form-control:focus { outline: none; border-color: var(--tm-accent); }
+    .form-textarea { min-height: 100px; resize: vertical; }
+
+    /* ============================================================
+       TOKEN CARD (Premium)
        ============================================================ */
     .key-card-frame {
         width: 100%; max-width: 390px; padding: 18px;
-        border: 2px solid var(--tm-line); background: rgba(255,255,255,0.93);
-        box-shadow: var(--tm-shadow-hard);
+        border: 1px solid var(--tm-line); background: var(--tm-surface);
+        box-shadow: var(--tm-shadow-soft);
     }
     .key-card-meta {
         display: flex; justify-content: space-between; gap: 12px;
         margin-bottom: 14px; padding-bottom: 10px;
-        border-bottom: 1px solid rgba(21,21,21,0.14);
+        border-bottom: 1px solid var(--tm-line-muted);
         font-family: var(--tm-font-mono); font-size: 10px;
         letter-spacing: 0.14em; text-transform: uppercase; color: var(--tm-muted);
     }
@@ -151,7 +455,7 @@
     .chip svg { width: 12px; height: 12px; flex-shrink: 0; }
 
     /* ============================================================
-       3. PREMIUM CODE WINDOW
+       CODE WINDOW (Premium)
        ============================================================ */
     .tm-code-window {
         position: relative; margin: 0; overflow: hidden;
@@ -195,13 +499,13 @@
     .token-punctuation { color: #aab2bf; }
 
     /* ============================================================
-       4. PANELS & READOUT
+       READOUT STRIP
        ============================================================ */
     .readout-strip { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; margin-bottom: 22px; }
     .readout-tile {
         position: relative; padding: 18px 18px 20px;
-        border: 2px solid var(--tm-line); background: rgba(255,255,255,0.95);
-        box-shadow: 6px 6px 0 rgba(21,21,21,0.06);
+        border: 1px solid var(--tm-line); background: var(--tm-surface);
+        box-shadow: var(--tm-shadow-soft);
     }
     .readout-tile::before {
         content: ""; position: absolute; left: 16px; top: 0;
@@ -214,11 +518,14 @@
     }
     .readout-tile__value { font-size: 14.5px; font-weight: 600; line-height: 1.5; }
 
+    /* ============================================================
+       PANEL
+       ============================================================ */
     .panel {
         position: relative; isolation: isolate;
         padding: 30px 32px 32px; margin-bottom: 18px;
-        border: 2px solid var(--tm-line); background: rgba(255,255,255,0.96);
-        box-shadow: 10px 10px 0 rgba(21,21,21,0.09);
+        border: 1px solid var(--tm-line); background: var(--tm-surface);
+        box-shadow: var(--tm-shadow-hard);
     }
     .panel::before {
         content: ""; position: absolute; left: 0; top: 0;
@@ -227,7 +534,7 @@
     .panel-head {
         display: flex; align-items: center; gap: 12px;
         margin-bottom: 18px; padding-bottom: 14px;
-        border-bottom: 1px solid rgba(21,21,21,0.12);
+        border-bottom: 1px solid var(--tm-line-muted);
     }
     .panel-tick { width: 11px; height: 11px; background: var(--tm-accent); flex-shrink: 0; }
     .panel h2 {
@@ -235,147 +542,558 @@
         line-height: 1.15; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase;
     }
     .list-clean { list-style: none; display: grid; gap: 12px; }
-    .list-clean li { position: relative; padding: 0 0 0 22px; color: var(--tm-muted); }
+    .list-clean li { position: relative; padding: 0 0 0 22px; color: var(--tm-text-secondary); }
     .list-clean li::before { content: ""; position: absolute; left: 0; top: 9px; width: 9px; height: 9px; background: var(--tm-accent); }
     .list-clean li strong { color: var(--tm-text); }
 
     /* ============================================================
-       5. FEATURE GRID
+       FEATURE CARDS (3-col)
        ============================================================ */
-    .feature-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
-    .feature-card {
+    .feature-3col { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; }
+    .feature-3card {
         display: flex; flex-direction: column; min-height: 100%;
-        padding: 18px; border: 2px solid var(--tm-line);
-        background: linear-gradient(180deg, rgba(255,255,255,0.24) 0%, rgba(255,255,255,0) 100%), var(--tm-surface);
+        padding: 18px; border: 1px solid var(--tm-line);
+        background: var(--tm-surface);
         transition: transform 0.18s ease;
     }
-    .feature-card:hover { transform: translate(-3px, -3px); }
-    .feature-card__icon {
+    .feature-3card:hover { transform: translate(-3px, -3px); box-shadow: var(--tm-shadow-hard); }
+    .feature-3card__icon {
         width: 40px; height: 40px; margin-bottom: 14px;
-        border: 2px solid var(--tm-line); background: var(--tm-accent);
+        border: 1px solid var(--tm-line); background: var(--tm-accent);
         color: #ffffff; display: flex; align-items: center; justify-content: center;
     }
-    .feature-card__icon svg { width: 18px; height: 18px; }
-    .feature-card h3 { margin: 0 0 8px; font-size: 15px; line-height: 1.38; font-weight: 700; text-transform: uppercase; }
-    .feature-card p { margin: 0; color: var(--tm-muted); font-size: 14px; }
+    .feature-3card__icon svg { width: 18px; height: 18px; }
+    .feature-3card h3 { margin: 0 0 8px; font-size: 15px; line-height: 1.38; font-weight: 700; text-transform: uppercase; }
+    .feature-3card p { margin: 0; color: var(--tm-muted); font-size: 14px; }
 
     /* ============================================================
-       6. SPEC LIST
+       SPEC LIST
        ============================================================ */
     .spec-list { border-top: 2px solid var(--tm-line); }
     .spec-row {
         display: grid; grid-template-columns: 200px 1fr; gap: 18px;
-        padding: 14px 0; border-bottom: 1px solid rgba(21,21,21,0.14);
+        padding: 14px 0; border-bottom: 1px solid var(--tm-line-muted);
     }
     .spec-label {
         color: var(--tm-muted); font-family: var(--tm-font-mono);
         font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase;
     }
-    .spec-value { color: var(--tm-muted); font-size: 15px; }
+    .spec-value { color: var(--tm-text-secondary); font-size: 15px; }
     .spec-value code {
         display: inline-block; padding: 2px 7px;
-        border: 1px solid rgba(21,21,21,0.15); background: var(--tm-surface);
+        border: 1px solid var(--tm-line-muted); background: var(--tm-surface-alt);
         font-family: var(--tm-font-mono); font-size: 12.5px;
     }
 
     /* ============================================================
-       7. BUTTONS
+       FOOTER
        ============================================================ */
-    .button {
-        display: inline-flex; align-items: center; justify-content: center;
-        min-height: 46px; padding: 0 18px; border: 1px solid var(--tm-line);
-        font-size: 13px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase;
-        transition: transform 0.15s, background 0.15s, border-color 0.15s; cursor: pointer;
+    .site-footer {
+        padding: 48px 0; border-top: 1px solid var(--tm-line-muted);
+        background: var(--tm-surface);
     }
-    .button:hover { transform: translateY(-2px); }
-    .button--primary { border-color: var(--tm-accent); background: var(--tm-accent); color: #fff; }
-    .button--ghost { background: rgba(255,255,255,0.72); color: var(--tm-text); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 42px; }
+    .footer-grid strong { display: block; margin-bottom: 12px; font-size: 16px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .footer-grid p { color: var(--tm-text-secondary); font-size: 14px; line-height: 1.6; }
+    .footer-grid span {
+        display: block; margin-bottom: 12px;
+        font-family: var(--tm-font-mono); font-size: 11px; font-weight: 700;
+        letter-spacing: 0.12em; text-transform: uppercase; color: var(--tm-muted);
+    }
+    .footer-grid a { display: block; padding: 4px 0; font-size: 14px; color: var(--tm-text-secondary); }
+    .footer-grid a:hover { color: var(--tm-text); }
 
     /* ============================================================
        RESPONSIVE
        ============================================================ */
-    @media (max-width: 920px) {
-        .page { padding: 36px 0 48px; }
-        .feature-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
-        .readout-strip { grid-template-columns: 1fr; }
-        .spec-row { grid-template-columns: 1fr; gap: 6px; }
+    @media (max-width: 980px) {
+        .hero-grid { grid-template-columns: 1fr; gap: 28px; min-height: auto; }
+        .definition-grid, .workflow-grid, .proof-grid, .pricing-grid, .contact-grid { grid-template-columns: 1fr; }
+        .feature-grid { grid-template-columns: 1fr; }
+        .feature-card-wide { grid-column: span 1; }
+        .updates-grid, .pain-grid { grid-template-columns: repeat(2, 1fr); }
+        .mini-grid { grid-template-columns: 1fr; }
+        .footer-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 560px) {
-        .page { width: min(100% - 24px, 1180px); }
-        .feature-grid { grid-template-columns: 1fr; }
+        .container { width: min(100% - 24px, var(--tm-container)); }
+        .section { padding: 56px 0; }
+        .updates-grid, .pain-grid, .feature-3col { grid-template-columns: 1fr; }
+        .readout-strip { grid-template-columns: 1fr; }
+        .visual-metrics { grid-template-columns: 1fr; }
+        .visual-metrics article { border-right: none; border-bottom: 1px solid var(--tm-line-muted); }
+        .visual-metrics article:last-child { border-bottom: none; }
+        .footer-grid { grid-template-columns: 1fr; }
         .tm-code-body { padding: 18px 14px; }
         .tm-code-body code { font-size: 13px; }
+        .spec-row { grid-template-columns: 1fr; gap: 6px; }
     }
 </style>
 </head>
 <body>
 
-<div class="page">
-
-    <!-- NAVIGATION -->
-    <nav class="preview-nav">
-        <a href="#accent-word">Accent Word</a>
+<!-- NAVIGATION -->
+<nav class="preview-nav">
+    <div class="preview-nav-inner">
+        <a href="#hero">Hero</a>
+        <a href="#trust">Trust</a>
+        <a href="#product">Product</a>
+        <a href="#features">Features</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#updates">Updates</a>
+        <a href="#pain">Pain Points</a>
+        <a href="#platform">Platform</a>
+        <a href="#proof">Proof</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
         <a href="#token-card">Token Card</a>
         <a href="#code-window">Code Window</a>
-        <a href="#readout">Readout Strip</a>
-        <a href="#panels">Panels</a>
-        <a href="#features">Feature Grid</a>
-        <a href="#spec-list">Spec List</a>
-        <a href="#buttons">Buttons</a>
-    </nav>
+    </div>
+</nav>
 
-    <!-- 1. ACCENT WORD PATTERN -->
-    <section class="section accent-demo" id="accent-word">
-        <p class="eyebrow">4.7 · Accent Word Pattern</p>
-        <h1>Token Extraction <span>Engine</span></h1>
-        <p class="section-desc">One keyword in a headline highlighted with the primary accent color. Use sparingly — one accent word per section maximum.</p>
-    </section>
+<main>
 
-    <!-- 2. PREMIUM TOKEN CARD -->
-    <section class="section" id="token-card">
-        <p class="eyebrow">4.8 · Premium Token Card</p>
-        <h2 class="section-title" style="margin-bottom: 8px; font-size: clamp(21px,2vw,25px); line-height: 1.15; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase;">Activation Key Display</h2>
-        <p class="section-desc">Dark-gradient card with holographic sheen, mono typography, perforation line, and pill-shaped chips. For keys, codes, licenses, and identifiers.</p>
-
-        <div class="key-card-frame">
-            <div class="key-card-meta">
-                <span>Preview Artifact</span>
-                <span>Activation Sample</span>
-            </div>
-            <div class="key-card">
-                <div class="key-card__sheen"></div>
-                <div class="key-card__label">Activation Key</div>
-                <div class="key-card__value">
-                    <span>8F2C</span><span class="sep">–</span><span class="seg--dim">ZQ91</span><span class="sep">–</span><span>K4D7</span><span class="sep">–</span><span class="seg--dim">TX5E</span>
+    <!-- 1. HERO -->
+    <section class="section" id="hero">
+        <div class="container hero-grid">
+            <div>
+                <p class="eyebrow">For website owners and marketing teams</p>
+                <h1>Service that shows where the site loses <span class="title-highlight">clients</span> and <span class="title-highlight">money</span></h1>
+                <p class="hero-lead">Platform connects as a counter, finds weak points in the funnel, calculates losses in currency and suggests what to fix for growth without guessing.</p>
+                <div class="hero-actions">
+                    <a class="button button-primary" href="#contact">Get demo on your site</a>
+                    <a class="button button-secondary" href="#workflow">See mechanics</a>
                 </div>
-                <div class="key-card__perforation">
-                    <div class="key-card__footer">
-                        <span class="chip">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
-                            Unique Code
-                        </span>
-                        <span class="chip">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
-                            1 Code = 1 Order
-                        </span>
+                <ul class="hero-notes">
+                    <li>Connection in 5 minutes</li>
+                    <li>No daily developer work</li>
+                    <li>Results in 15 minutes</li>
+                </ul>
+            </div>
+            <div class="hero-panel">
+                <div class="hero-visual frame">
+                    <div class="visual-topline">
+                        <span class="visual-kicker">live diagnostics</span>
+                        <span>overview</span>
+                    </div>
+                    <div class="visual-metrics">
+                        <article><strong>186</strong><span>loss per visitor</span></article>
+                        <article><strong>+127k</strong><span>growth potential / mo</span></article>
+                        <article><strong>02:14</strong><span>to first insight</span></article>
+                    </div>
+                    <div class="visual-canvas">
+                        <div class="signal-stack">
+                            <article class="signal-card">
+                                <span class="signal-label">problem detected</span>
+                                <h3>Checkout takes too much attention on input, not purchase confirmation</h3>
+                                <p>37 sessions ended at delivery step after repeated attempts to fill the form.</p>
+                            </article>
+                            <article class="signal-card">
+                                <span class="signal-label">recommended action</span>
+                                <h3>Reduce form to 3 required fields and raise CTA above the fold</h3>
+                                <p>Hypothesis tied to real failure scenario, not general "improve UX" advice.</p>
+                            </article>
+                        </div>
+                    </div>
+                    <div class="visual-log">
+                        <div><span class="log-label">AI insight</span><p>Simplify checkout to 3 fields. Potential: +8.4% order completion.</p></div>
+                        <div><span class="log-label">action</span><p>Enable exit-intent form on catalog. Forecast: +27 leads / week.</p></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 3. PREMIUM CODE WINDOW -->
-    <section class="section" id="code-window">
-        <p class="eyebrow">4.9 · Premium Code Window</p>
-        <h2 class="section-title" style="margin-bottom: 8px; font-size: clamp(21px,2vw,25px); line-height: 1.15; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase;">Code Display Block</h2>
-        <p class="section-desc">Dark-themed code editor window with macOS chrome, atmospheric gradient overlay, and seven syntax highlighting tokens.</p>
-
-        <div class="tm-code-window">
-            <div class="tm-code-header">
-                <span class="tm-code-dots" aria-hidden="true"><span></span><span></span><span></span></span>
-                <span class="tm-code-title">design-analyzer.js</span>
+    <!-- 2. TRUST BAND -->
+    <section class="trust-band" id="trust">
+        <div class="container trust-grid">
+            <div class="trust-metrics">
+                <article><strong>4 280+</strong><span>sessions / week</span></article>
+                <article><strong>2.4%</strong><span>avg conversion</span></article>
+                <article><strong>15 min</strong><span>to first signals</span></article>
+                <article><strong>&infin;</strong><span>users in cabinet</span></article>
             </div>
-            <div class="tm-code-body">
+            <div class="trust-platforms">
+                <span>Integrations</span>
+                <ul>
+                    <li>WordPress</li>
+                    <li>OpenCart</li>
+                    <li>Shopify</li>
+                    <li>WooCommerce</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. PRODUCT DEFINITION -->
+    <section class="section" id="product">
+        <div class="container">
+            <div class="section-head">
+                <p class="eyebrow">What is this service</p>
+                <h2>Clear <span class="title-highlight">product</span> without terminology confusion</h2>
+                <p>First we remove unnecessary associations so it's clear exactly what you pay for and what result you get in practice.</p>
+            </div>
+            <div class="definition-grid">
+                <div class="definition-list frame">
+                    <article><h3>Not a constructor or hosting</h3><p>Doesn't replace your CMS or require migration. Connects as an analytics and conversion growth layer.</p></article>
+                    <article><h3>Not an ad network</h3><p>Service doesn't bring traffic by itself. Shows where current traffic breaks and gives specific fix recommendations.</p></article>
+                    <article><h3>Not a replacement for analytics</h3><p>Analytics answers "what's happening", this service answers "what to fix right now and how much it will give".</p></article>
+                    <article><h3>Not daily development</h3><p>Install one script, then work with ready insights, replays, triggers, forms and reports in one cabinet.</p></article>
+                </div>
+                <aside class="definition-aside frame">
+                    <p class="eyebrow">Why business needs this</p>
+                    <h3>When traffic already exists, the most expensive mistake is fixing the site blindly</h3>
+                    <p>Service turns chaotic analytics into a working action list: where visitor got stuck, what prevents purchase, which change pays off fastest.</p>
+                    <ul class="plain-list">
+                        <li>Funnel problems prioritized by money</li>
+                        <li>Recommendations for marketing, product and development</li>
+                        <li>Trigger forms and lead return without separate stack</li>
+                    </ul>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. FEATURE GRID (2-col with wide) -->
+    <section class="section section-alt" id="features">
+        <div class="container">
+            <div class="section-head">
+                <p class="eyebrow">What client gets</p>
+                <h2>One <span class="title-highlight">subscription</span> with the entire working circuit already assembled</h2>
+                <p>Not a set of disparate modules, but a unified platform where analytics, diagnostics, lead capture and hypothesis implementation are connected.</p>
+            </div>
+            <div class="feature-grid">
+                <article class="feature-card feature-card-wide frame">
+                    <div class="feature-meta">core analysis</div>
+                    <h3>Loss analysis and recommendations in currency</h3>
+                    <p>Service shows where the site loses money right now and turns behavioral signals into ready-to-implement tasks with revenue potential estimate.</p>
+                </article>
+                <article class="feature-card frame">
+                    <div class="feature-meta">behavior</div>
+                    <h3>Replay and click maps</h3>
+                    <p>Session recordings, attention and click maps separately for desktop and mobile devices.</p>
+                </article>
+                <article class="feature-card frame">
+                    <div class="feature-meta">team access</div>
+                    <h3>Shared cabinet for team</h3>
+                    <p>Marketer, manager and developer work in one interface without access limitations.</p>
+                </article>
+                <article class="feature-card feature-card-wide frame">
+                    <div class="feature-meta">growth engine</div>
+                    <h3>Forms and triggers without separate build</h3>
+                    <p>Exit intent, inactivity reaction, hints in problem areas, email notifications and lead saving are already included in the platform.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. WORKFLOW / TIMELINE -->
+    <section class="section" id="workflow">
+        <div class="container workflow-grid">
+            <div>
+                <div class="section-head align-left">
+                    <p class="eyebrow">How it works</p>
+                    <h2>Three steps from observation to conversion <span class="title-highlight">growth</span></h2>
+                    <p>Platform first collects behavior, then automatically identifies problem points, and then helps return those who were ready to leave a request or buy.</p>
+                </div>
+                <ol class="timeline">
+                    <li>
+                        <span>01</span>
+                        <div><h3>Behavior collection</h3><p>Clicks, scroll, trajectories, dead clicks, rage clicks, exit points and problematic screens.</p></div>
+                    </li>
+                    <li>
+                        <span>02</span>
+                        <div><h3>AI analysis</h3><p>Insights, friction score, hypothesis prioritization and benefit estimate for each improvement.</p></div>
+                    </li>
+                    <li>
+                        <span>03</span>
+                        <div><h3>Lead return and capture</h3><p>Triggers, forms and messages activate where they actually help complete the customer journey.</p></div>
+                    </li>
+                </ol>
+            </div>
+            <div class="workflow-visual frame">
+                <div class="diagram">
+                    <div class="diagram-column">
+                        <h3>site signals</h3>
+                        <ul>
+                            <li>product card view</li>
+                            <li>abandoned checkout</li>
+                            <li>rage clicks on CTA</li>
+                            <li>traffic source / UTM</li>
+                        </ul>
+                    </div>
+                    <div class="diagram-node"><span>AI</span></div>
+                    <div class="diagram-column">
+                        <h3>growth actions</h3>
+                        <ul>
+                            <li>interface hypothesis</li>
+                            <li>return form</li>
+                            <li>email notification</li>
+                            <li>currency forecast</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="diagram-note">All blocks built natively in HTML/SVG for fast loading and scaling without raster artifacts.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. UPDATES GRID -->
+    <section class="section section-alt" id="updates">
+        <div class="container">
+            <div class="section-head">
+                <p class="eyebrow">New platform capabilities</p>
+                <h2>Not just <span class="title-highlight">diagnostics</span>, but a built-in growth circuit</h2>
+                <p>Subscription already includes tools that help not just observe the problem, but quickly turn it into action.</p>
+            </div>
+            <div class="updates-grid">
+                <article class="frame"><h3>Growth Engine</h3><p>Behavioral triggers, pop-up scenarios, inactivity reactions and message control directly on the site.</p></article>
+                <article class="frame"><h3>Lead generation + email</h3><p>Forms collect contacts in cabinet and immediately send requests to your email without additional services.</p></article>
+                <article class="frame"><h3>Personalization</h3><p>Different offers for new, returning, advertising and mobile users.</p></article>
+                <article class="frame"><h3>UTM and advertising</h3><p>Separate view of traffic quality and places where paid channels lose conversion fastest.</p></article>
+                <article class="frame"><h3>Competitor comparison</h3><p>Up to three domains in analysis to see market weak and strong sides next to your site.</p></article>
+                <article class="frame"><h3>AI copywriting</h3><p>CTA and trigger text generation based on real data, not abstract templates.</p></article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. PAIN POINTS -->
+    <section class="section" id="pain">
+        <div class="container">
+            <div class="section-head">
+                <p class="eyebrow">This is about you if</p>
+                <h2>Typical situations where the platform pays off <span class="title-highlight">fastest</span></h2>
+            </div>
+            <div class="pain-grid">
+                <article class="frame pain-card"><h3>Traffic exists but sales don't grow</h3><p>Money in advertising is already going, but it's unclear at which step users break off and why.</p></article>
+                <article class="frame pain-card"><h3>Analytics gives numbers but not solutions</h3><p>Reports exist, but there's no clear list of changes for interface, form or checkout.</p></article>
+                <article class="frame pain-card"><h3>Fixes are too expensive</h3><p>Each hypothesis turns into a long redesign or argument without data between marketing and development.</p></article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. PLATFORM TABS -->
+    <section class="section section-alt" id="platform">
+        <div class="container">
+            <div class="section-head">
+                <p class="eyebrow">Platform by segments</p>
+                <h2>Full stack of capabilities without visual <span class="title-highlight">overload</span></h2>
+                <p>Instead of a long wall of cards, the block is divided into four clear directions. This makes it easier to quickly understand what the platform can do for your task.</p>
+            </div>
+            <div class="tab-shell frame">
+                <div class="tab-nav" role="tablist">
+                    <button class="tab-button is-active" type="button" data-tab="tab-behavior" aria-selected="true">Behavior</button>
+                    <button class="tab-button" type="button" data-tab="tab-ai" aria-selected="false">AI & Analytics</button>
+                    <button class="tab-button" type="button" data-tab="tab-growth" aria-selected="false">Growth Tools</button>
+                    <button class="tab-button" type="button" data-tab="tab-commerce" aria-selected="false">E-commerce</button>
+                </div>
+                <div class="tab-panel is-active" id="tab-behavior">
+                    <div class="mini-grid">
+                        <article><h3>Sessions and replay</h3><p>Full user path: clicks, scroll, mouse movements, dead and rage clicks.</p></article>
+                        <article><h3>Heatmap and attention map</h3><p>Visual layer for clickability, attention and empty interest zone assessment.</p></article>
+                        <article><h3>Device breakdown</h3><p>Desktop and mobile scenario comparison without signal mixing.</p></article>
+                        <article><h3>Auto Discovery</h3><p>Auto-detection of CTA, forms, cart and key funnels without manual marking.</p></article>
+                    </div>
+                </div>
+                <div class="tab-panel" id="tab-ai">
+                    <div class="mini-grid">
+                        <article><h3>AI insights</h3><p>Problems, hypotheses and fix effects in one decision feed.</p></article>
+                        <article><h3>Friction score</h3><p>Numeric friction index for quickly finding leak pages.</p></article>
+                        <article><h3>Revenue leaks</h3><p>Revenue losses calculated in business language, not just event language.</p></article>
+                        <article><h3>PDF reports</h3><p>Clear reports for management and clients without manual presentation assembly.</p></article>
+                    </div>
+                </div>
+                <div class="tab-panel" id="tab-growth">
+                    <div class="mini-grid">
+                        <article><h3>Pop-up and banners</h3><p>Customer return scenarios without separate constructor and new stack implementation.</p></article>
+                        <article><h3>Feedback forms</h3><p>Lead generation, questions, consultation requests and quick offers.</p></article>
+                        <article><h3>Offer segmentation</h3><p>New, returning, mobile, paid traffic — different messages for different states.</p></article>
+                        <article><h3>AI copywriting</h3><p>Texts for CTA and triggers based on real audience behavior.</p></article>
+                    </div>
+                </div>
+                <div class="tab-panel" id="tab-commerce">
+                    <div class="mini-grid">
+                        <article><h3>Checkout control</h3><p>Form, step and input mask problems visible in order completion context.</p></article>
+                        <article><h3>UTM slices</h3><p>Quickly see which sources break earlier and more expensively than others.</p></article>
+                        <article><h3>Competitor comparison</h3><p>Speed, UX and market conversion patterns in one working field.</p></article>
+                        <article><h3>Team work</h3><p>Marketing and development get a shared solution list, not priority arguments.</p></article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. PROOF (quotes + comparison) -->
+    <section class="section" id="proof">
+        <div class="container proof-grid">
+            <div>
+                <div class="section-head align-left">
+                    <p class="eyebrow">Evidence</p>
+                    <h2>What helps believe the <span class="title-highlight">product</span> before the call and purchase</h2>
+                </div>
+                <div class="quote-stack">
+                    <article class="frame"><p>"Before, CRO audit was a rare expensive project. Here we get new hypotheses every 15 minutes and immediately understand what will give more money."</p><span>E-commerce Director · FMCG brand</span></article>
+                    <article class="frame"><p>"Intent 'wanted to buy but couldn't' became much more useful for the development team than any general UX words."</p><span>Product Owner · SaaS</span></article>
+                    <article class="frame"><p>"Three fixes in a week paid off the subscription in the first month: checkout, button and form."</p><span>Online store owner</span></article>
+                </div>
+            </div>
+            <div>
+                <div class="comparison frame">
+                    <h3>Why the platform closes the task faster than manual diagnostics</h3>
+                    <div class="comparison-table">
+                        <div><span>Regular analytics</span><strong>Shows numbers</strong></div>
+                        <div><span>This platform</span><strong>Shows problem, priority and action</strong></div>
+                        <div><span>One-time CRO audit</span><strong>Project for weeks or months</strong></div>
+                        <div><span>This platform</span><strong>Continuous stream of signals and hypotheses</strong></div>
+                        <div><span>Separate lead gen</span><strong>Needs additional service</strong></div>
+                        <div><span>This platform</span><strong>Forms and triggers already inside subscription</strong></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. PRICING -->
+    <section class="section section-alt" id="pricing">
+        <div class="container pricing-grid">
+            <div>
+                <div class="section-head align-left">
+                    <p class="eyebrow">Pricing</p>
+                    <h2>One subscription per site, no extra charges for separate <span class="title-highlight">modules</span></h2>
+                    <p>Connection, analytics, AI insights, replay, click maps, lead generation, email requests, Growth Engine and team cabinet are already included.</p>
+                </div>
+            </div>
+            <div class="pricing-card frame">
+                <div class="pricing-head">
+                    <span>Platform</span>
+                    <strong>$49</strong>
+                    <small>/ site / month</small>
+                </div>
+                <ul class="plain-list">
+                    <li>AI insights and site problem list</li>
+                    <li>Replay, heatmap and attention map</li>
+                    <li>Real-time revenue loss counter</li>
+                    <li>Trigger forms and return scenarios</li>
+                    <li>Email notifications for new requests</li>
+                    <li>Unlimited number of users</li>
+                </ul>
+                <a class="button button-primary button-block" href="#contact">Start with demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. FAQ -->
+    <section class="section" id="faq">
+        <div class="container faq-wrap">
+            <div class="section-head">
+                <p class="eyebrow">FAQ</p>
+                <h2>Short <span class="title-highlight">answers</span> to key questions before connection</h2>
+            </div>
+            <div class="faq-list">
+                <article class="faq-item frame">
+                    <button class="faq-question" type="button" aria-expanded="false"><span>What is this service in simple terms?</span><span class="faq-icon"></span></button>
+                    <div class="faq-answer"><p>A service for website owners. You install one script, and the system shows where users get lost, what needs to be fixed and what effect it will have in money.</p></div>
+                </article>
+                <article class="faq-item frame">
+                    <button class="faq-question" type="button" aria-expanded="false"><span>How is this different from regular analytics?</span><span class="faq-icon"></span></button>
+                    <div class="faq-answer"><p>Analytics shows events and numbers. This service turns them into specific solutions: which part of the interface to fix, where to enable a trigger and what effect to expect after implementation.</p></div>
+                </article>
+                <article class="faq-item frame">
+                    <button class="faq-question" type="button" aria-expanded="false"><span>Do I need a developer to start?</span><span class="faq-icon"></span></button>
+                    <div class="faq-answer"><p>Usually no. It's enough to install one script or use a familiar CMS integration method. Then the team works inside the cabinet.</p></div>
+                </article>
+                <article class="faq-item frame">
+                    <button class="faq-question" type="button" aria-expanded="false"><span>When will I see first results?</span><span class="faq-icon"></span></button>
+                    <div class="faq-answer"><p>First signals usually appear within 15-30 minutes after launch. For a stable funnel picture, you need several days of live traffic.</p></div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 12. CONTACT FORM -->
+    <section class="section section-alt" id="contact">
+        <div class="container contact-grid">
+            <div>
+                <p class="eyebrow">Final CTA</p>
+                <h2>Show on your site where <span class="title-highlight">leads</span> and <span class="title-highlight">money</span> are currently lost</h2>
+                <p>Leave contact details. If you already have traffic, we can show how the service fits into the real work scenario of your specific project.</p>
+                <ul class="plain-list">
+                    <li>We'll analyze your current funnel</li>
+                    <li>Show what signals the system will collect</li>
+                    <li>Explain how to quickly get first hypotheses</li>
+                </ul>
+            </div>
+            <div class="contact-card frame">
+                <form novalidate>
+                    <div class="field-group">
+                        <label>Your name *</label>
+                        <input type="text" class="form-control" placeholder="John Doe" required>
+                    </div>
+                    <div class="field-group">
+                        <label>Email *</label>
+                        <input type="email" class="form-control" placeholder="john@example.com" required>
+                    </div>
+                    <div class="field-group">
+                        <label>Phone</label>
+                        <input type="tel" class="form-control" placeholder="+1 (555) 123-4567">
+                    </div>
+                    <div class="field-group">
+                        <label>Comment</label>
+                        <textarea class="form-control form-textarea" placeholder="Briefly tell about your site, traffic or task"></textarea>
+                    </div>
+                    <button class="button button-primary button-block" type="submit">Send request</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 13. PREMIUM TOKEN CARD -->
+    <section class="section" id="token-card">
+        <div class="container">
+            <div class="section-head">
+                <p class="eyebrow">Component · Premium Token Card</p>
+                <h2>Activation <span class="title-highlight">key</span> display</h2>
+                <p>Dark-gradient card with holographic sheen, mono typography, perforation line, and pill-shaped chips. For keys, codes, licenses, and identifiers.</p>
+            </div>
+            <div style="display: flex; justify-content: center;">
+                <div class="key-card-frame">
+                    <div class="key-card-meta">
+                        <span>Preview Artifact</span>
+                        <span>Activation Sample</span>
+                    </div>
+                    <div class="key-card">
+                        <div class="key-card__sheen"></div>
+                        <div class="key-card__label">Activation Key</div>
+                        <div class="key-card__value">
+                            <span>8F2C</span><span class="sep">-</span><span class="seg--dim">ZQ91</span><span class="sep">-</span><span>K4D7</span><span class="sep">-</span><span class="seg--dim">TX5E</span>
+                        </div>
+                        <div class="key-card__perforation">
+                            <div class="key-card__footer">
+                                <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>Unique Code</span>
+                                <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>1 Code = 1 Order</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 14. PREMIUM CODE WINDOW -->
+    <section class="section section-alt" id="code-window">
+        <div class="container">
+            <div class="section-head">
+                <p class="eyebrow">Component · Premium Code Window</p>
+                <h2>Code <span class="title-highlight">display</span> block</h2>
+                <p>Dark-themed code editor window with macOS chrome, atmospheric gradient overlay, and seven syntax highlighting tokens.</p>
+            </div>
+            <div class="tm-code-window">
+                <div class="tm-code-header">
+                    <span class="tm-code-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+                    <span class="tm-code-title">design-analyzer.js</span>
+                </div>
+                <div class="tm-code-body">
 <pre><code><span class="token-keyword">const</span> <span class="token-function">pluckDeep</span> = <span class="token-property">key</span> <span class="token-punctuation">=></span> <span class="token-property">obj</span> <span class="token-punctuation">=></span>
   key<span class="token-punctuation">.</span><span class="token-function">split</span>(<span class="token-string">'.'</span>)<span class="token-punctuation">.</span><span class="token-function">reduce</span>(
     (<span class="token-property">accum</span><span class="token-punctuation">,</span> <span class="token-property">key</span>) <span class="token-punctuation">=></span> accum<span class="token-punctuation">[</span>key<span class="token-punctuation">]</span><span class="token-punctuation">,</span>
@@ -387,149 +1105,59 @@
   <span class="token-keyword">const</span> tokens <span class="token-punctuation">=</span> <span class="token-keyword">await</span> <span class="token-function">extractDesignTokens</span>(url)<span class="token-punctuation">;</span>
   <span class="token-keyword">return</span> <span class="token-function">createDesignMarkdown</span>(tokens)<span class="token-punctuation">;</span>
 <span class="token-punctuation">}</span><span class="token-punctuation">;</span></code></pre>
-            </div>
-        </div>
-    </section>
-
-    <!-- 4. READOUT STRIP -->
-    <section class="section" id="readout">
-        <p class="eyebrow">Readout Strip</p>
-        <h2 class="section-title" style="margin-bottom: 8px; font-size: clamp(21px,2vw,25px); line-height: 1.15; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase;">Key Metrics</h2>
-        <p class="section-desc">Three-column metric strip with accent top-border markers. For quick stats and key data points.</p>
-
-        <div class="readout-strip">
-            <div class="readout-tile">
-                <div class="readout-tile__label">Key Binding</div>
-                <div class="readout-tile__value">On first transition to "Completed"</div>
-            </div>
-            <div class="readout-tile">
-                <div class="readout-tile__label">Customer Email</div>
-                <div class="readout-tile__value">Notification + link to "My Codes"</div>
-            </div>
-            <div class="readout-tile">
-                <div class="readout-tile__label">Backup Send</div>
-                <div class="readout-tile__value">Via standard OpenCart emails</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 5. PANELS -->
-    <section class="section" id="panels">
-        <p class="eyebrow">Panels</p>
-        <h2 class="section-title" style="margin-bottom: 8px; font-size: clamp(21px,2vw,25px); line-height: 1.15; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase;">Module Purpose</h2>
-        <p class="section-desc">Framed content panels with accent top-border and tick markers. For feature lists and structured information.</p>
-
-        <div class="panel">
-            <div class="panel-head">
-                <span class="panel-tick"></span>
-                <h2>Key Features</h2>
-            </div>
-            <ul class="list-clean">
-                <li><strong>Automation:</strong> key binding on order status transition to "Completed".</li>
-                <li><strong>Uniqueness control:</strong> same code never issued twice until admin returns it to pool.</li>
-                <li><strong>Stock sync:</strong> product quantity auto-recalculates from free key count.</li>
-                <li><strong>Admin convenience:</strong> manual entry, CSV import, status view, and key management in order.</li>
-            </ul>
-        </div>
-    </section>
-
-    <!-- 6. FEATURE GRID -->
-    <section class="section" id="features">
-        <p class="eyebrow">Feature Grid</p>
-        <h2 class="section-title" style="margin-bottom: 8px; font-size: clamp(21px,2vw,25px); line-height: 1.15; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase;">Capabilities</h2>
-        <p class="section-desc">Three-column card grid with icon headers and hover lift effect. For feature showcases and product capabilities.</p>
-
-        <div class="feature-grid">
-            <article class="feature-card">
-                <div class="feature-card__icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="15" r="4"/><path d="M11 12l8-8M16 5l2 2M19 2l2 2"/></svg>
-                </div>
-                <h3>Import & Manage Keys</h3>
-                <p>Textarea and CSV import in product card, plus quick CSV template for admin.</p>
-            </article>
-            <article class="feature-card">
-                <div class="feature-card__icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6"/></svg>
-                </div>
-                <h3>Customer Account</h3>
-                <p>Dedicated "My Activation Codes" page with purchase history and related products.</p>
-            </article>
-            <article class="feature-card">
-                <div class="feature-card__icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 2.5h6v3H9zM8 11h8M8 15h8M8 19h5"/></svg>
-                </div>
-                <h3>Admin Order Panel</h3>
-                <p>Shows issued codes with resend notification and return keys to pool buttons.</p>
-            </article>
-            <article class="feature-card">
-                <div class="feature-card__icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 10-12 0c0 4-1.5 5.5-1.5 7h15c0-1.5-1.5-3-1.5-7z"/><path d="M9.5 18a2.5 2.5 0 005 0"/></svg>
-                </div>
-                <h3>Low Stock Alerts</h3>
-                <p>Configurable admin notification on free key threshold (enable/disable in settings).</p>
-            </article>
-            <article class="feature-card">
-                <div class="feature-card__icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18M8 13h3M8 16h6"/></svg>
-                </div>
-                <h3>Optional Help Page</h3>
-                <p>Link any OpenCart information page to a product — customer sees it next to their key.</p>
-            </article>
-            <article class="feature-card">
-                <div class="feature-card__icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
-                </div>
-                <h3>Safe Re-issuance</h3>
-                <p>Codes don't duplicate on repeated "Completed" transitions — tracks already-bound count per order.</p>
-            </article>
-        </div>
-    </section>
-
-    <!-- 7. SPEC LIST -->
-    <section class="section" id="spec-list">
-        <p class="eyebrow">Spec List</p>
-        <h2 class="section-title" style="margin-bottom: 8px; font-size: clamp(21px,2vw,25px); line-height: 1.15; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase;">Technical Details</h2>
-        <p class="section-desc">Two-column specification rows with mono labels. For technical specifications and configuration details.</p>
-
-        <div class="panel">
-            <div class="spec-list">
-                <div class="spec-row">
-                    <div class="spec-label">Architecture</div>
-                    <div class="spec-value">MVC-L for OpenCart 3.x, separate admin and catalog controllers.</div>
-                </div>
-                <div class="spec-row">
-                    <div class="spec-label">Events</div>
-                    <div class="spec-value">Product save and order status change via event system.</div>
-                </div>
-                <div class="spec-row">
-                    <div class="spec-label">OCMOD</div>
-                    <div class="spec-value">Targeted insertions in order emails and account templates.</div>
-                </div>
-                <div class="spec-row">
-                    <div class="spec-label">Database</div>
-                    <div class="spec-value">Custom <code>oc_dc_code</code> table with indexes and product/code uniqueness.</div>
-                </div>
-                <div class="spec-row">
-                    <div class="spec-label">Stock</div>
-                    <div class="spec-value">Product quantity synced with free code count.</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 8. BUTTONS -->
-    <section class="section" id="buttons">
-        <p class="eyebrow">Buttons</p>
-        <h2 class="section-title" style="margin-bottom: 8px; font-size: clamp(21px,2vw,25px); line-height: 1.15; font-weight: 700; letter-spacing: -0.03em; text-transform: uppercase;">Actions</h2>
-        <p class="section-desc">Primary and ghost button variants. For CTAs and secondary actions.</p>
+</main>
 
-        <div style="display: flex; flex-wrap: wrap; gap: 12px;">
-            <button class="button button--primary">Primary Action</button>
-            <button class="button button--ghost">Secondary Action</button>
+<!-- FOOTER -->
+<footer class="site-footer">
+    <div class="container footer-grid">
+        <div>
+            <strong>Tom Modern Design</strong>
+            <p>Component preview for the Tom Modern HTML Style Rule skill. All components follow the editorial-technical design family.</p>
         </div>
-    </section>
+        <div>
+            <span>Components</span>
+            <a href="#token-card">Token Card</a>
+            <a href="#code-window">Code Window</a>
+            <a href="#features">Feature Grid</a>
+        </div>
+        <div>
+            <span>Resources</span>
+            <a href="#faq">FAQ</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </div>
+</footer>
 
-</div>
+<script>
+// FAQ toggle
+document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('is-open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('is-open'));
+        if (!isOpen) item.classList.add('is-open');
+        btn.setAttribute('aria-expanded', !isOpen);
+    });
+});
+
+// Tab switching
+document.querySelectorAll('.tab-button').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const tabId = btn.dataset.tab;
+        const shell = btn.closest('.tab-shell');
+        shell.querySelectorAll('.tab-button').forEach(b => { b.classList.remove('is-active'); b.setAttribute('aria-selected', 'false'); });
+        shell.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-selected', 'true');
+        document.getElementById(tabId).classList.add('is-active');
+    });
+});
+</script>
 
 </body>
 </html>
