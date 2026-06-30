@@ -180,8 +180,28 @@ Buttons, cards, metrics, callouts, feature blocks, previews, demos, and content 
 Avoid:
 - default Bootstrap look
 - default Tailwind look
-- “rounded everything”
+- "rounded everything"
 - no distinction between primary and secondary actions
+
+### 4.7 Accent Word Pattern
+
+Highlight one keyword in a headline with the primary accent color.
+
+Use sparingly — one accent word per section maximum.
+
+```html
+<h1>Token Extraction <span style="color: var(--accent-color)">Engine</span></h1>
+```
+
+Prefer:
+- Single word, not phrases
+- The most important/brand-defining word
+- Only in hero or section headlines
+
+Avoid:
+- Multiple accent words in one heading
+- Accent words in body text
+- Accent words that break reading flow
 
 ---
 
