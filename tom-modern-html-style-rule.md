@@ -203,6 +203,32 @@ Avoid:
 - Accent words in body text
 - Accent words that break reading flow
 
+### 4.8 Premium Token Card
+
+A signature dark-gradient card for displaying tokens, codes, keys, and identifiers.
+
+This component uses a navy-to-teal gradient, holographic sheen animation, mono typography, perforation line with circular cutouts, and pill-shaped chips. It is designed for any scenario where a short alphanumeric value needs to be presented as a premium visual artifact.
+
+**Full specification:** [`components/premium-token-card.md`](components/premium-token-card.md)
+
+**When to use:** activation keys, promo codes, license keys, order/tracking numbers, invite links, PIN codes, API keys, payment card numbers, status identifiers.
+
+**Quick HTML:**
+```html
+<div class="key-card">
+    <div class="key-card__sheen"></div>
+    <div class="key-card__label">Label</div>
+    <div class="key-card__value">
+        <span>8F2C</span><span class="sep">–</span><span class="seg--dim">ZQ91</span>
+    </div>
+    <div class="key-card__perforation">
+        <div class="key-card__footer">
+            <span class="chip">Metadata</span>
+        </div>
+    </div>
+</div>
+```
+
 ---
 
 ## 5. HTML-First Workflow
