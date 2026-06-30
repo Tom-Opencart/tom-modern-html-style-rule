@@ -229,6 +229,31 @@ This component uses a navy-to-teal gradient, holographic sheen animation, mono t
 </div>
 ```
 
+### 4.9 Premium Code Window
+
+A dark-themed code display component that mimics a native editor window.
+
+This component uses a deep blue-black background, macOS-style traffic light dots, atmospheric gradient overlay, and seven syntax highlighting tokens. It is designed for any scenario where code needs to be presented as a premium visual artifact.
+
+**Full specification:** [`components/premium-code-window.md`](components/premium-code-window.md)
+
+**When to use:** API documentation, configuration snippets, CSS/HTML examples, SQL schemas, JSON/YAML blocks, shell commands, plugin code samples, tutorial steps.
+
+**Quick HTML:**
+```html
+<div class="tm-code-window">
+    <div class="tm-code-header">
+        <span class="tm-code-dots" aria-hidden="true">
+            <span></span><span></span><span></span>
+        </span>
+        <span class="tm-code-title">example.js</span>
+    </div>
+    <div class="tm-code-body">
+<pre><code><span class="token-keyword">const</span> x = <span class="token-number">42</span>;</code></pre>
+    </div>
+</div>
+```
+
 ---
 
 ## 5. HTML-First Workflow
