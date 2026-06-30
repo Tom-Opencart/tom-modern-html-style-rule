@@ -27,7 +27,7 @@ When activated, this skill generates HTML in **Tom Modern Design** — an editor
 
 ## Live Preview
 
-**[View Component Preview →](https://tom-opencart.github.io/tom-modern-html-style-rule/preview.html)**
+**[View Component Preview →](https://tom-opencart.github.io/tom-modern-html-style-rule/)**
 
 Interactive demo of all components: Accent Word, Premium Token Card, Premium Code Window, Readout Strip, Panels, Feature Grid, Spec List, and Buttons.
 
