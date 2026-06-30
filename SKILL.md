@@ -23,10 +23,43 @@ This trigger can be changed later.
 1. Determine whether the target is:
    - standalone HTML / landing / promo / description
    - OpenCart admin / OpenCart module UI
-2. Prefer HTML-first execution unless the user explicitly requires direct template integration.
-3. Build the result in Tom's accepted modern design family.
-4. Avoid generic AI-generated landing-page patterns.
-5. Verify both desktop and mobile before sign-off.
+2. **Load the design system**: Include `tom-modern.css` in the HTML head.
+3. **Use templates**: Copy blocks from `templates/` folder and replace content.
+4. Prefer HTML-first execution unless the user explicitly requires direct template integration.
+5. Build the result in Tom's accepted modern design family.
+6. Avoid generic AI-generated landing-page patterns.
+7. Verify both desktop and mobile before sign-off.
+
+### Quick Start
+
+```html
+<!-- Load fonts -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-mono/style.css">
+
+<!-- Load design system -->
+<link rel="stylesheet" href="tom-modern.css">
+
+<!-- Copy templates from templates/ folder -->
+```
+
+### Available Templates
+
+| Template | Use For |
+|---|---|
+| `hero.html` | Hero section with dashboard visual |
+| `trust-band.html` | Metrics strip |
+| `feature-grid.html` | 2-col feature cards |
+| `feature-3col.html` | 3-col with icons |
+| `workflow.html` | Timeline steps |
+| `pricing.html` | Pricing card |
+| `faq.html` | Accordion |
+| `contact.html` | Form |
+| `footer.html` | Site footer |
+| `token-card.html` | Premium key/code display |
+| `code-window.html` | Code editor display |
+
+See `templates/` for all 19 available blocks.
 
 ## Style Identity
 
@@ -175,5 +208,12 @@ The result passes only if:
 
 ## Reference
 
-For the expanded version of this rule, read:
-- `tom-modern-html-style-rule.md`
+| File | Purpose |
+|---|---|
+| `tom-modern.css` | Complete CSS design system — load this first |
+| `tom-modern-html-style-rule.md` | Expanded design principles and guidelines |
+| `quick-start.html` | Example page showing how to use the system |
+| `index.html` | Live component preview |
+| `templates/` | 19 ready-to-use HTML blocks |
+| `components/premium-token-card.md` | Token card specification |
+| `components/premium-code-window.md` | Code window specification |
