@@ -165,11 +165,32 @@ Use neutral grays and whites for page backgrounds and surfaces. Do not use beige
 
 | Token | Correct | Wrong |
 |---|---|---|
-| Page background | `#f5f5f3`, `#f7f7f5`, `#fafafa` | `#f4f1ea`, `#f5f0e8`, `#faf5ed` |
+| Page background | `#fafafa`, `#f5f5f5`, `#f7f7f7` | `#f4f1ea`, `#f5f0e8`, `#faf5ed` |
 | Surface | `#ffffff`, `#fcfcfc` | `#fffaf1`, `#fff8f0`, `#fdf6ee` |
-| Muted text | `#6b6b6b`, `#717171` | `#69645b`, `#8a7e6b` |
+| Surface alt | `#f4f4f5`, `#f5f5f5` | `#f5f0e8`, `#eee8da` |
+| Muted text | `#71717a`, `#717171`, `#6b6b6b` | `#69645b`, `#8a7e6b` |
 
 This rule exists because warm beige tones make the design feel dated and "soft" — the Tom Modern aesthetic is clean, neutral, and precise.
+
+**Canonical color palette** (from production reference):
+
+```css
+:root {
+    --bg-color: #fafafa;
+    --bg-grid: rgba(150, 150, 150, 0.04);
+    --surface-color: #ffffff;
+    --surface-alt: #f4f4f5;
+    --border-color: #969696;
+    --border-muted: #d4d4d8;
+    --text-primary: #27272a;
+    --text-secondary: #52525b;
+    --text-muted: #71717a;
+    --accent-color: #ff5a00;
+    --accent-soft: rgba(255, 90, 0, 0.08);
+    --shadow-hard: 8px 8px 0 rgba(150, 150, 150, 0.12);
+    --shadow-soft: 4px 4px 0 rgba(150, 150, 150, 0.1);
+}
+```
 
 ### 4.5 Background Must Build Atmosphere
 
