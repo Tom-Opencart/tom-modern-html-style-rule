@@ -159,6 +159,18 @@ Avoid:
 - loud visual noise
 - dark mode by default unless task or donor requires it
 
+**Background colors must be neutral, not warm.**
+
+Use neutral grays and whites for page backgrounds and surfaces. Do not use beige, cream, ivory, or other warm tones.
+
+| Token | Correct | Wrong |
+|---|---|---|
+| Page background | `#f5f5f3`, `#f7f7f5`, `#fafafa` | `#f4f1ea`, `#f5f0e8`, `#faf5ed` |
+| Surface | `#ffffff`, `#fcfcfc` | `#fffaf1`, `#fff8f0`, `#fdf6ee` |
+| Muted text | `#6b6b6b`, `#717171` | `#69645b`, `#8a7e6b` |
+
+This rule exists because warm beige tones make the design feel dated and "soft" — the Tom Modern aesthetic is clean, neutral, and precise.
+
 ### 4.5 Background Must Build Atmosphere
 
 Prefer:
@@ -172,6 +184,7 @@ Avoid:
 - empty flat background with no atmosphere
 - background effects as the only design idea
 - loud blob compositions
+- warm beige/cream background colors
 
 ### 4.6 Components Must Feel Designed
 
