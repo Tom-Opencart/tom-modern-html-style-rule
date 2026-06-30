@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tom Modern Design — Quick Start</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-mono/style.css">
+    <link rel="stylesheet" href="tom-modern.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="site-header">
+        <div class="container header-bar">
+            <a class="brand" href="#">
+                <span class="brand-mark"></span>
+                <span class="brand-copy">
+                    <strong>YourBrand</strong>
+                    <small>tagline here</small>
+                </span>
+            </a>
+            <nav class="site-nav">
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#faq">FAQ</a>
+                <a class="nav-cta" href="#contact">Get Started</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO — from templates/hero.html -->
+        <section class="section">
+            <div class="container hero-grid">
+                <div>
+                    <p class="eyebrow">For teams that ship fast</p>
+                    <h1>Build interfaces that <span class="title-highlight">look professional</span> without the overhead</h1>
+                    <p class="hero-lead">A complete design system with ready-to-use components. Copy, paste, customize. No build tools required.</p>
+                    <div class="hero-actions">
+                        <a class="button button-primary" href="#contact">Start Building</a>
+                        <a class="button button-secondary" href="#features">See Components</a>
+                    </div>
+                    <ul class="hero-notes">
+                        <li>26 component blocks</li>
+                        <li>CSS variables for easy theming</li>
+                        <li>Responsive by default</li>
+                    </ul>
+                </div>
+                <div class="hero-panel">
+                    <div class="hero-visual frame">
+                        <div class="visual-topline">
+                            <span class="visual-kicker">design system</span>
+                            <span>tom-modern / preview</span>
+                        </div>
+                        <div class="visual-metrics">
+                            <article><strong>26</strong><span>components</span></article>
+                            <article><strong>14</strong><span>templates</span></article>
+                            <article><strong>0</strong><span>dependencies</span></article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TRUST BAND — from templates/trust-band.html -->
+        <section class="trust-band">
+            <div class="container trust-grid">
+                <div class="trust-metrics">
+                    <article><strong>0px</strong><span>border-radius</span></article>
+                    <article><strong>#fafafa</strong><span>background</span></article>
+                    <article><strong>#ff5a00</strong><span>accent</span></article>
+                    <article><strong>Geist</strong><span>typography</span></article>
+                </div>
+                <div class="trust-platforms">
+                    <span>Works with</span>
+                    <ul>
+                        <li>HTML</li>
+                        <li>CSS</li>
+                        <li>JS</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURES — from templates/feature-3col.html -->
+        <section class="section" id="features">
+            <div class="container">
+                <div class="section-head">
+                    <p class="eyebrow">Components</p>
+                    <h2>Everything you need to <span class="title-highlight">build fast</span></h2>
+                    <p>Ready-to-use blocks that follow Tom Modern Design rules. Copy and customize.</p>
+                </div>
+                <div class="feature-3col">
+                    <article class="feature-3card">
+                        <div class="feature-3card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+                        </div>
+                        <h3>Layout Blocks</h3>
+                        <p>Hero, trust band, feature grids, panels, and more structural components.</p>
+                    </article>
+                    <article class="feature-3card">
+                        <div class="feature-3card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        </div>
+                        <h3>Premium Cards</h3>
+                        <p>Token card with holographic sheen and code window with syntax highlighting.</p>
+                    </article>
+                    <article class="feature-3card">
+                        <div class="feature-3card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+                        </div>
+                        <h3>Interactive</h3>
+                        <p>Tabs, FAQ accordion, contact forms — all with vanilla JavaScript.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRICING — from templates/pricing.html -->
+        <section class="section section-alt" id="pricing">
+            <div class="container pricing-grid">
+                <div>
+                    <div class="section-head align-left">
+                        <p class="eyebrow">Pricing</p>
+                        <h2>Free and <span class="title-highlight">open source</span></h2>
+                        <p>Use in any project — personal or commercial. No license fees, no restrictions.</p>
+                    </div>
+                </div>
+                <div class="pricing-card frame">
+                    <div class="pricing-head">
+                        <span>Tom Modern Design</span>
+                        <strong>Free</strong>
+                        <small>MIT License</small>
+                    </div>
+                    <ul class="plain-list">
+                        <li>26 CSS component blocks</li>
+                        <li>14 HTML templates</li>
+                        <li>CSS custom properties</li>
+                        <li>Responsive design</li>
+                        <li>Dark code windows</li>
+                        <li>Premium token cards</li>
+                    </ul>
+                    <a class="button button-primary button-block" href="https://github.com/Tom-Opencart/tom-modern-html-style-rule">View on GitHub</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ — from templates/faq.html -->
+        <section class="section" id="faq">
+            <div class="container faq-wrap">
+                <div class="section-head">
+                    <p class="eyebrow">FAQ</p>
+                    <h2>Common <span class="title-highlight">questions</span></h2>
+                </div>
+                <div class="faq-list">
+                    <article class="faq-item frame">
+                        <button class="faq-question" type="button" aria-expanded="false">
+                            <span>How do I use this?</span>
+                            <span class="faq-icon"></span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Link <code>tom-modern.css</code> in your HTML, copy templates from the <code>templates/</code> folder, and customize the content. No build tools required.</p>
+                        </div>
+                    </article>
+                    <article class="faq-item frame">
+                        <button class="faq-question" type="button" aria-expanded="false">
+                            <span>Can I change the accent color?</span>
+                            <span class="faq-icon"></span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes! Override <code>--tm-accent</code> in your CSS. All components use CSS custom properties for easy theming.</p>
+                        </div>
+                    </article>
+                    <article class="faq-item frame">
+                        <button class="faq-question" type="button" aria-expanded="false">
+                            <span>Is it responsive?</span>
+                            <span class="faq-icon"></span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes. All components include responsive breakpoints at 980px and 560px. Grids collapse to single columns on mobile.</p>
+                        </div>
+                    </article>
+                    <article class="faq-item frame">
+                        <button class="faq-question" type="button" aria-expanded="false">
+                            <span>Do I need JavaScript?</span>
+                            <span class="faq-icon"></span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Only for interactive components (FAQ accordion, tabs). All other components are pure CSS.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT — from templates/contact.html -->
+        <section class="section section-alt" id="contact">
+            <div class="container contact-grid">
+                <div>
+                    <p class="eyebrow">Get in touch</p>
+                    <h2>Start using <span class="title-highlight">Tom Modern</span> today</h2>
+                    <p>Copy the CSS, grab a template, and build. It's that simple.</p>
+                    <ul class="plain-list">
+                        <li>No npm install required</li>
+                        <li>No build step</li>
+                        <li>No framework lock-in</li>
+                    </ul>
+                </div>
+                <div class="contact-card frame">
+                    <form novalidate>
+                        <div class="field-group">
+                            <label>Your name</label>
+                            <input type="text" class="form-control" placeholder="John Doe">
+                        </div>
+                        <div class="field-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control" placeholder="john@example.com">
+                        </div>
+                        <div class="field-group">
+                            <label>Project type</label>
+                            <textarea class="form-control form-textarea" placeholder="Landing page, SaaS, documentation..."></textarea>
+                        </div>
+                        <button class="button button-primary button-block" type="submit">Get Started</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER — from templates/footer.html -->
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div>
+                <strong>Tom Modern Design</strong>
+                <p>A complete design system for building professional interfaces. Open source, free to use.</p>
+            </div>
+            <div>
+                <span>Resources</span>
+                <a href="https://github.com/Tom-Opencart/tom-modern-html-style-rule">GitHub</a>
+                <a href="index.html">Preview</a>
+                <a href="#">Documentation</a>
+            </div>
+            <div>
+                <span>Components</span>
+                <a href="#features">Feature Grid</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#faq">FAQ</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    // FAQ toggle
+    document.querySelectorAll('.faq-question').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const item = btn.closest('.faq-item');
+            const isOpen = item.classList.contains('is-open');
+            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('is-open'));
+            if (!isOpen) item.classList.add('is-open');
+            btn.setAttribute('aria-expanded', !isOpen);
+        });
+    });
+    </script>
+
+</body>
+</html>

@@ -1,27 +1,165 @@
 # Tom Modern HTML Style Rule
 
-Public rule set and skill template for LLMs and coding agents that need to create HTML in Tom's accepted modern design style.
+Public rule set, design system, and ready-to-use templates for LLMs and coding agents that need to create HTML in Tom's accepted modern design style.
 
 Current trigger word:
 - `современный дизайн`
 
-This trigger is configurable.
-If you want another trigger phrase, change it in `SKILL.md` and in the rule text.
+---
+
+## Quick Start for AI Agents
+
+**To reproduce Tom Modern Design exactly:**
+
+1. Load `tom-modern.css` — the complete design system with all tokens and components
+2. Copy blocks from `templates/` — ready-to-use HTML for each component
+3. Reference `tom-modern-html-style-rule.md` — principles and guidelines
+
+```html
+<!-- Step 1: Load fonts -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-mono/style.css">
+
+<!-- Step 2: Load design system -->
+<link rel="stylesheet" href="tom-modern.css">
+
+<!-- Step 3: Copy a template -->
+<!-- See templates/ folder -->
+```
 
 ---
 
-## What This Skill Produces
+## Files
 
-When activated, this skill generates HTML in **Tom Modern Design** — an editorial-technical design family that is structured, sharp, restrained, premium, and intentional.
+| File | Purpose |
+|---|---|
+| `tom-modern.css` | Complete CSS design system (tokens + all components) |
+| `tom-modern-html-style-rule.md` | Design principles and guidelines |
+| `quick-start.html` | Example page using the design system |
+| `index.html` | Live component preview |
+| `components/premium-token-card.md` | Token card specification |
+| `components/premium-code-window.md` | Code window specification |
+| `templates/` | Ready-to-use HTML blocks |
 
-### Design Characteristics
+---
 
-- **Typography:** Geist / Geist Mono or IBM Plex Sans / IBM Plex Mono
-- **Colors:** One primary accent, neutral supporting palette, strong contrast
-- **Layout:** Structured composition, split heroes, framed sections, asymmetry where justified
-- **Corners:** Sharp 0px (no rounded Bootstrap/Tailwind look)
-- **Backgrounds:** Subtle grids, structural lines, quiet gradient depth
-- **Shadows:** Hard offset shadows (not soft Material elevation)
+## Templates
+
+| Template | Description |
+|---|---|
+| `hero.html` | Hero section with dashboard visual |
+| `trust-band.html` | Metrics strip with integrations |
+| `feature-grid.html` | 2-column feature grid with wide cards |
+| `feature-3col.html` | 3-column feature grid with icons |
+| `definition-grid.html` | Definition list + aside panel |
+| `workflow.html` | Timeline steps + diagram |
+| `updates.html` | 6-card updates grid |
+| `pain-points.html` | 3-card pain points grid |
+| `tabs.html` | Tabbed content panels |
+| `pricing.html` | Pricing card |
+| `faq.html` | FAQ accordion (requires JS) |
+| `proof.html` | Quotes + comparison table |
+| `contact.html` | Contact form |
+| `footer.html` | Site footer |
+| `readout-strip.html` | 3-column metric tiles |
+| `panel.html` | Content panel with list |
+| `spec-list.html` | Specification rows |
+| `token-card.html` | Premium token card |
+| `code-window.html` | Premium code window |
+
+---
+
+## Design Tokens
+
+```css
+:root {
+    --tm-bg: #fafafa;           /* Page background */
+    --tm-surface: #ffffff;       /* Card/panel surface */
+    --tm-surface-alt: #f4f4f5;   /* Alternate surface */
+    --tm-text: #27272a;          /* Primary text */
+    --tm-text-secondary: #52525b; /* Secondary text */
+    --tm-muted: #71717a;         /* Muted text */
+    --tm-line: #969696;          /* Border color */
+    --tm-line-muted: #d4d4d8;    /* Muted border */
+    --tm-accent: #ff5a00;        /* Accent (vermillion) */
+    --tm-shadow-hard: 8px 8px 0 rgba(150, 150, 150, 0.12);
+    --tm-shadow-soft: 4px 4px 0 rgba(150, 150, 150, 0.1);
+    --tm-font-sans: 'Geist Sans', system-ui, sans-serif;
+    --tm-font-mono: 'Geist Mono', ui-monospace, monospace;
+}
+```
+
+---
+
+## Component CSS Classes
+
+### Layout
+- `.container` — centered max-width container
+- `.section` — vertical padding section
+- `.section-alt` — alternate background section
+- `.frame` — card with border and shadow
+
+### Typography
+- `.eyebrow` — uppercase mono label
+- `.title-highlight` — accent-colored text span
+- `.section-head` — section header with title and description
+
+### Buttons
+- `.button` — base button
+- `.button-primary` — dark filled button
+- `.button-secondary` — transparent outlined button
+- `.button-block` — full-width button
+
+### Hero
+- `.hero-grid` — 2-column hero layout
+- `.hero-lead` — lead paragraph
+- `.hero-actions` — button group
+- `.hero-notes` — bullet list of key points
+
+### Trust
+- `.trust-band` — metrics strip
+- `.trust-metrics` — metric items
+- `.trust-platforms` — integration logos
+
+### Features
+- `.feature-grid` — 2-column grid (with `.feature-card-wide` for full-width)
+- `.feature-3col` — 3-column grid with icons
+- `.feature-meta` — category label
+
+### Workflow
+- `.timeline` — numbered steps
+- `.diagram` — input → process → output diagram
+
+### Tabs
+- `.tab-shell` — tab container
+- `.tab-nav` — tab buttons
+- `.tab-button` — individual tab (add `.is-active`)
+- `.tab-panel` — tab content (add `.is-active`)
+
+### FAQ
+- `.faq-list` — accordion container
+- `.faq-item` — individual item (add `.is-open`)
+- `.faq-question` — clickable question
+- `.faq-answer` — hidden answer
+
+### Forms
+- `.contact-grid` — 2-column form layout
+- `.field-group` — label + input group
+- `.form-control` — input/textarea
+
+### Pricing
+- `.pricing-grid` — 2-column pricing layout
+- `.pricing-card` — pricing card
+- `.pricing-head` — price display
+
+### Proof
+- `.proof-grid` — 2-column proof layout
+- `.quote-stack` — testimonial cards
+- `.comparison` — comparison table
+
+### Premium Components
+- `.key-card-frame` → `.key-card` → `.key-card__sheen` + `.key-card__label` + `.key-card__value`
+- `.tm-code-window` → `.tm-code-header` + `.tm-code-body`
 
 ---
 
@@ -29,84 +167,19 @@ When activated, this skill generates HTML in **Tom Modern Design** — an editor
 
 **[View Component Preview →](https://tom-opencart.github.io/tom-modern-html-style-rule/)**
 
-Interactive demo of all components: Accent Word, Premium Token Card, Premium Code Window, Readout Strip, Panels, Feature Grid, Spec List, and Buttons.
-
 ---
 
-## Component Library
+## Agent Instructions
 
-The skill includes two reusable signature components:
+When an AI agent needs to create a page in Tom Modern Design:
 
-### Premium Token Card (`components/premium-token-card.md`)
-
-For displaying tokens, codes, keys, and identifiers.
-
-**Use cases:**
-- Digital product activation keys
-- Promo / discount codes
-- License keys and serial numbers
-- Order / invoice / tracking numbers
-- Invite links / referral codes
-- PIN codes / access tokens
-- API keys in documentation
-- Payment card numbers (masked)
-- VIP / status identifiers
-
-**Variations:** default, promo, compact, inverse, status, payment
-
-### Premium Code Window (`components/premium-code-window.md`)
-
-For displaying code snippets with syntax highlighting.
-
-**Use cases:**
-- API documentation examples
-- Configuration file snippets
-- CSS/HTML code examples
-- SQL schema definitions
-- JSON/YAML configuration blocks
-- Shell commands and CLI examples
-- Plugin/module code samples
-
-**Variations:** default, light, compact, no-dots, terminal
-
----
-
-## Sections Covered
-
-| # | Section | What It Captures |
-|---|---|---|
-| 1 | What This Rule Means | Scope and intent |
-| 2 | Primary Output Types | Landing pages, descriptions, modules |
-| 3 | Core Style Identity | Editorial-technical design family |
-| 4 | Hard Visual Rules | No AI slop, typography, layout, color, background, components |
-| 4.7 | Accent Word Pattern | Single keyword highlight in headlines |
-| 4.8 | Premium Token Card | Dark-gradient card for codes/keys |
-| 4.9 | Premium Code Window | Dark code editor display |
-| 5 | HTML-First Workflow | Build in HTML first, then adapt |
-| 6 | OpenCart Branching | Standalone vs admin/module branches |
-| 7 | Responsive Requirement | Mobile-first mandatory |
-| 8 | Motion Rule | Meaningful animation only |
-| 9 | Preferred Visual Signals | Good vs bad patterns |
-| 10 | Implementation Expectations | Quality bar |
-| 11 | OpenCart Adaptation | Preserve visual truth |
-| 12 | Decision Rule | Agent decision framework |
-| 13 | Acceptance Test | Pass/fail criteria |
-| 14 | Short Identity Label | Tom Modern Design |
-
----
-
-## Contents
-
-- `SKILL.md` — ready-to-use skill file
-- `tom-modern-html-style-rule.md` — expanded reference and system instruction
-- `components/premium-token-card.md` — token/code card component spec
-- `components/premium-code-window.md` — code display component spec
-
----
-
-## Usage
-
-1. Copy `SKILL.md` into your agent's skill directory
-2. Or reference `tom-modern-html-style-rule.md` as a system instruction
-3. When the user says `современный дизайн`, the agent creates HTML in this style
-4. For specific components, reference the files in `components/`
+1. **Load the CSS**: `<link rel="stylesheet" href="tom-modern.css">`
+2. **Use templates**: Copy from `templates/` and replace content
+3. **Use accent word**: One `<span class="title-highlight">word</span>` per headline
+4. **Use `.frame` class**: For all cards and panels
+5. **Use `.eyebrow` class**: For section labels
+6. **Use CSS variables**: Never hardcode colors — use `var(--tm-accent)` etc.
+7. **Sharp corners**: Never add border-radius — the design is 0px corners
+8. **Neutral background**: Use `#fafafa` — never beige/cream
+9. **Geist font**: Use `'Geist Sans'` for body, `'Geist Mono'` for labels/code
+10. **Hard shadows**: Use `var(--tm-shadow-hard)` for hover effects

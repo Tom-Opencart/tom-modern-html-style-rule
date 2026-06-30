@@ -1,0 +1,64 @@
+<!-- Tom Modern Design — FAQ Template -->
+<!-- Copy this block and replace content with your own -->
+<!-- Requires JS for toggle functionality -->
+
+<section class="section">
+    <div class="container faq-wrap">
+        <div class="section-head">
+            <p class="eyebrow">FAQ</p>
+            <h2>Frequently asked <span class="title-highlight">questions</span></h2>
+        </div>
+
+        <div class="faq-list">
+            <article class="faq-item frame">
+                <button class="faq-question" type="button" aria-expanded="false">
+                    <span>Question one?</span>
+                    <span class="faq-icon"></span>
+                </button>
+                <div class="faq-answer">
+                    <p>Answer to question one. Keep answers concise and helpful.</p>
+                </div>
+            </article>
+            <article class="faq-item frame">
+                <button class="faq-question" type="button" aria-expanded="false">
+                    <span>Question two?</span>
+                    <span class="faq-icon"></span>
+                </button>
+                <div class="faq-answer">
+                    <p>Answer to question two.</p>
+                </div>
+            </article>
+            <article class="faq-item frame">
+                <button class="faq-question" type="button" aria-expanded="false">
+                    <span>Question three?</span>
+                    <span class="faq-icon"></span>
+                </button>
+                <div class="faq-answer">
+                    <p>Answer to question three.</p>
+                </div>
+            </article>
+            <article class="faq-item frame">
+                <button class="faq-question" type="button" aria-expanded="false">
+                    <span>Question four?</span>
+                    <span class="faq-icon"></span>
+                </button>
+                <div class="faq-answer">
+                    <p>Answer to question four.</p>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<script>
+// FAQ toggle
+document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('is-open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('is-open'));
+        if (!isOpen) item.classList.add('is-open');
+        btn.setAttribute('aria-expanded', !isOpen);
+    });
+});
+</script>

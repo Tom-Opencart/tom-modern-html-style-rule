@@ -1,0 +1,76 @@
+<!-- Tom Modern Design — Tabs Template -->
+<!-- Copy this block and replace content with your own -->
+<!-- Requires JS for tab switching functionality -->
+
+<section class="section section-alt">
+    <div class="container">
+        <div class="section-head">
+            <p class="eyebrow">Section label</p>
+            <h2>Section heading with <span class="title-highlight">tabs</span></h2>
+            <p>Section description explaining the tabbed content.</p>
+        </div>
+
+        <div class="tab-shell frame">
+            <div class="tab-nav" role="tablist">
+                <button class="tab-button is-active" type="button" data-tab="tab-1" aria-selected="true">Tab One</button>
+                <button class="tab-button" type="button" data-tab="tab-2" aria-selected="false">Tab Two</button>
+                <button class="tab-button" type="button" data-tab="tab-3" aria-selected="false">Tab Three</button>
+                <button class="tab-button" type="button" data-tab="tab-4" aria-selected="false">Tab Four</button>
+            </div>
+
+            <div class="tab-panel is-active" id="tab-1">
+                <div class="mini-grid">
+                    <article><h3>Item title</h3><p>Item description text.</p></article>
+                    <article><h3>Item title</h3><p>Item description text.</p></article>
+                    <article><h3>Item title</h3><p>Item description text.</p></article>
+                    <article><h3>Item title</h3><p>Item description text.</p></article>
+                </div>
+            </div>
+
+            <div class="tab-panel" id="tab-2">
+                <div class="mini-grid">
+                    <article><h3>Item title</h3><p>Item description text.</p></article>
+                    <article><h3>Item title</h3><p>Item description text.</p></article>
+                    <article><h3>Item title</h3><p>Item description text.</p></article>
+                    <article><h3>Item title</h3><p>Item description text.</p></article>
+                </div>
+            </div>
+
+            <div class="tab-panel" id="tab-3">
+                <div class="mini-grid">
+                    <article><h3>Item title</h3><p>Item description text.</p></article>
+                    <article><h3>Item title</h3><p>Item description text.</p></article>
+                    <article><h3>Item title</h3><p>Item description text.</p></article>
+                    <article><h3>Item title</h3><p>Item description text.</p></article>
+                </div>
+            </div>
+
+            <div class="tab-panel" id="tab-4">
+                <div class="mini-grid">
+                    <article><h3>Item title</h3><p>Item description text.</p></article>
+                    <article><h3>Item title</h3><p>Item description text.</p></article>
+                    <article><h3>Item title</h3><p>Item description text.</p></article>
+                    <article><h3>Item title</h3><p>Item description text.</p></article>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+// Tab switching
+document.querySelectorAll('.tab-button').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const tabId = btn.dataset.tab;
+        const shell = btn.closest('.tab-shell');
+        shell.querySelectorAll('.tab-button').forEach(b => {
+            b.classList.remove('is-active');
+            b.setAttribute('aria-selected', 'false');
+        });
+        shell.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-selected', 'true');
+        document.getElementById(tabId).classList.add('is-active');
+    });
+});
+</script>
